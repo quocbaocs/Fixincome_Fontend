@@ -3,7 +3,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {
-  MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBContainer, MDBView, MDBMask, MDBDropdownToggle, MDBDropdown, MDBDropdownMenu, MDBDropdownItem
+  MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBContainer, MDBDropdownToggle, MDBDropdown, MDBDropdownMenu, MDBDropdownItem
 } from 'mdbreact';
 import './MainLayout.scss';
 
@@ -33,44 +33,34 @@ export default class extends React.Component {
             </MDBNavbarBrand>
             <MDBNavbarToggler onClick={this.onClick} />
             <MDBCollapse isOpen={this.state.collapse} navbar>
-              <MDBNavbarNav left>
-                <NavLink to="/home" className="nav-item">
-                  <MDBNavItem>
-                    <MDBNavLink to="/home">Home</MDBNavLink>
-                  </MDBNavItem>
-                </NavLink>
+              <MDBNavbarNav left> 
+                <MDBNavItem>
+                  <MDBNavLink to="/home">Home</MDBNavLink>
+                </MDBNavItem> 
                 <MDBNavItem>
                   <MDBDropdown>
                     <MDBDropdownToggle nav caret>
                       <div className="d-none d-md-inline">Equity</div>
                     </MDBDropdownToggle>
-                    <MDBDropdownMenu left>
+                    <MDBDropdownMenu left='true'>
                       <MDBDropdownItem href="/chart">Stock charts</MDBDropdownItem>
                       <MDBDropdownItem href="#!">Financial reports</MDBDropdownItem>
                       <MDBDropdownItem href="#!">GGM</MDBDropdownItem>
                     </MDBDropdownMenu>
                   </MDBDropdown>
-                </MDBNavItem>
-                <NavLink to="/fixed-income" className="nav-item">
-                  <MDBNavItem>
-                    <MDBNavLink to="/fixed-income">Fix Income</MDBNavLink>
-                  </MDBNavItem>
-                </NavLink>
-                <NavLink to="/fx" className="nav-item">
-                  <MDBNavItem>
-                    <MDBNavLink to="/fx">FX</MDBNavLink>
-                  </MDBNavItem>
-                </NavLink>
-                <NavLink to="/derivatives" className="nav-item">
-                  <MDBNavItem>
-                    <MDBNavLink to="/derivatives">Derivatives</MDBNavLink>
-                  </MDBNavItem>
-                </NavLink>
-                <NavLink to="/portfolio-management" className="nav-item">
-                  <MDBNavItem>
-                    <MDBNavLink to="/portfolio-management">Portfolio Management</MDBNavLink>
-                  </MDBNavItem>
-                </NavLink>
+                </MDBNavItem> 
+                <MDBNavItem>
+                  <MDBNavLink to="/fixed-income">Fix Income</MDBNavLink>
+                </MDBNavItem> 
+                <MDBNavItem>
+                  <MDBNavLink to="/forex">FX</MDBNavLink>
+                </MDBNavItem> 
+                <MDBNavItem>
+                  <MDBNavLink to="/derivatives">Derivatives</MDBNavLink>
+                </MDBNavItem> 
+                <MDBNavItem>
+                  <MDBNavLink to="/portfolio-management">Portfolio Management</MDBNavLink>
+                </MDBNavItem> 
               </MDBNavbarNav>
             </MDBCollapse>
           </MDBContainer>

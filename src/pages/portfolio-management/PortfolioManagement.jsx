@@ -17,6 +17,7 @@ function isValidAsset(asset) {
   return asset.mean != null && asset.stdev != null;
 }
 
+/*
 function computeMean(w, meanI, meanJ) {
   return w * meanI + (1 - w) * meanJ;
 }
@@ -25,7 +26,7 @@ function computeStdev(w, stdevI, stdevJ, covariant) {
   const cov = stdevI * stdevJ * covariant;
   return Math.sqrt((w ** 2 * stdevI ** 2) + (2 * w * (1 - w) * cov) + ((1 - w) ** 2 * stdevJ ** 2));
 }
-
+*/
 function countCombination(assets = []) {
   const numAssets = assets.length;
   let counter = 0;

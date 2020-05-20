@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+#TradingVIew
+./src/charting_library/charting_library.min.js

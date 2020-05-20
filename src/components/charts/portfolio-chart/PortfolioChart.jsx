@@ -111,8 +111,7 @@ export default class extends React.Component {
   }
 
   updateChart(csvContent) {
-    const csv = parseCSV(csvContent);
-    console.log(csv);
+    const csv = parseCSV(csvContent); 
 
     // ["w", "mean12", "std12", "mean13", "std13", "mean23", "std23"]
     const headerRow = csv[0];

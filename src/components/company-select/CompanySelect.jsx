@@ -4,12 +4,7 @@ import makeAnimated from 'react-select/animated';
 import Select from 'react-select';
 import unirest from 'unirest';
 import './CompanySelect.scss';
-
-const demoOptions = [
-  { value: 'microsoft', label: 'Microsoft' },
-  { value: 'google', label: 'Google' },
-  { value: 'apple', label: 'Apple' }
-];
+ 
 
 
 export default class extends Component {

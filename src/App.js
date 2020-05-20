@@ -13,6 +13,7 @@ import HomePage from './pages/home/HomePage';
 import FinanceChartPage from './pages/chart/FinanceChartPage';
 import MainLayout from './layouts/MainLayout';
 import PortfolioManagement from './pages/portfolio-management/PortfolioManagement';
+import ForexChartPage from './pages/Forex/ForexChartPage';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
     <Switch>
       <Route path="/home" component={HomePage} />
       <Route path="/chart" component={FinanceChartPage} />
+      <Route path="/forex" component={ForexChartPage} />
       <Route path="/portfolio-management" component={PortfolioManagement} />
       <Redirect to="/home" />
     </Switch>

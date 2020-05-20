@@ -48,7 +48,7 @@ export default class extends Component {
   fetchOnlineData({ company, start, end }) {
     const req = unirest('GET', 'https://finnhub-realtime-stock-price.p.rapidapi.com/stock/candle');
 
-    console.log(start, end);
+     
     req.query({
       symbol: company,
       from: new Date(start).getTime() / 1000,
@@ -94,7 +94,7 @@ export default class extends Component {
 
   resolveLocalData(csvContent, start, end) {
     const csv = parseCSV(csvContent);
-    console.log(csv);
+     
 
     // ["Date", "Open", "High", "Low", "Close"]
     const rows = csv.slice(1);
