@@ -10,6 +10,7 @@ import './HomePage.scss';
 export default class extends React.Component {
   render() {
     return (
+       
       <MDBView src="image/background-img.jpg">
         <MDBMask overlay="black-strong" className="flex-center flex-column text-white text-center">
           <h2>Financial Technology</h2>

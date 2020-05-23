@@ -33,7 +33,7 @@ export default class extends Component {
 
     req.end((res) => {
       if (res.error) throw new Error(res.error);
-      console.log(res.body);
+      //console.log(res.body);
       this.setState({
         companies: res.body.slice(0, 10).map((symbol) => ({
           label: symbol.description,

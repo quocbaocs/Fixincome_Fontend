@@ -14,14 +14,18 @@ import FinanceChartPage from './pages/chart/FinanceChartPage';
 import MainLayout from './layouts/MainLayout';
 import PortfolioManagement from './pages/portfolio-management/PortfolioManagement';
 import ForexChartPage from './pages/Forex/ForexChartPage';
-
+import GGM from './pages/GGM/GGM';
+import RouteConstants from './utils/RouteConstants';
+import InterestRateParityPage from './pages/Forex/InterestRateParityPage';
 
 function App() {
   const routes = (
     <Switch>
-      <Route path="/home" component={HomePage} />
-      <Route path="/chart" component={FinanceChartPage} />
-      <Route path="/forex" component={ForexChartPage} />
+      <Route path="/home" component={HomePage} /> 
+      <Route path={RouteConstants.stockCharts} component={FinanceChartPage} />
+      <Route path={RouteConstants.ggm} component={GGM} />
+      <Route path={RouteConstants.forexCharts} component={ForexChartPage} />
+      <Route path={RouteConstants.interestRateParity} component={InterestRateParityPage} />
       <Route path="/portfolio-management" component={PortfolioManagement} />
       <Redirect to="/home" />
     </Switch>

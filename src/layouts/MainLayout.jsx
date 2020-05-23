@@ -6,6 +6,7 @@ import {
   MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBContainer, MDBDropdownToggle, MDBDropdown, MDBDropdownMenu, MDBDropdownItem
 } from 'mdbreact';
 import './MainLayout.scss';
+import RouteConstants from '../utils/RouteConstants';
 
 
 export default class extends React.Component {
@@ -43,9 +44,9 @@ export default class extends React.Component {
                       <div className="d-none d-md-inline">Equity</div>
                     </MDBDropdownToggle>
                     <MDBDropdownMenu left='true'>
-                      <MDBDropdownItem href="/chart">Stock charts</MDBDropdownItem>
-                      <MDBDropdownItem href="#!">Financial reports</MDBDropdownItem>
-                      <MDBDropdownItem href="#!">GGM</MDBDropdownItem>
+                      <MDBDropdownItem href={RouteConstants.stockCharts}>Stock charts</MDBDropdownItem>
+                      <MDBDropdownItem href={RouteConstants.financeReports}>Financial reports</MDBDropdownItem>
+                      <MDBDropdownItem href={RouteConstants.ggm}>GGM</MDBDropdownItem>
                     </MDBDropdownMenu>
                   </MDBDropdown>
                 </MDBNavItem> 
@@ -53,7 +54,16 @@ export default class extends React.Component {
                   <MDBNavLink to="/fixed-income">Fix Income</MDBNavLink>
                 </MDBNavItem> 
                 <MDBNavItem>
-                  <MDBNavLink to="/forex">FX</MDBNavLink>
+                <MDBDropdown>
+                    <MDBDropdownToggle nav caret>
+                      <div className="d-none d-md-inline">Forex</div>
+                    </MDBDropdownToggle>
+                    <MDBDropdownMenu left='true'>
+                      <MDBDropdownItem href={RouteConstants.forexCharts}>Forex charts</MDBDropdownItem>
+                      <MDBDropdownItem href={RouteConstants.forexCharts}>Heat Maps</MDBDropdownItem>
+                      <MDBDropdownItem href={RouteConstants.interestRateParity}>Interest Rate Parity</MDBDropdownItem>
+                    </MDBDropdownMenu>
+                  </MDBDropdown> 
                 </MDBNavItem> 
                 <MDBNavItem>
                   <MDBNavLink to="/derivatives">Derivatives</MDBNavLink>
