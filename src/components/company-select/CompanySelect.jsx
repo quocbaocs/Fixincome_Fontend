@@ -6,6 +6,12 @@ import unirest from 'unirest';
 import './CompanySelect.scss';
  
 
+const demoOptions = [
+  { value: 'microsoft', label: 'Microsoft' },
+  { value: 'google', label: 'Google' },
+  { value: 'apple', label: 'Apple' }
+];
+
 
 export default class extends Component {
   constructor(props) {
@@ -44,17 +50,18 @@ export default class extends Component {
   }
 
   render() {
-    const { companies } = this.state;
-    const { className, ...restProps } = this.props;
-
+    //const { companies } = this.state;
+    //const { className, ...restProps } = this.props;
+    const { className, options, ...restProps } = this.props;
     return (
       <>
-        <div className="text white">Select company</div>
+        
         <Select
           className={className}
-          options={companies}
+          options={options || demoOptions}
           component={makeAnimated}
           {...restProps}
+          placeholder='Select the company'
         />
       </>
     );

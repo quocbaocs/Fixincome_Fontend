@@ -7,7 +7,7 @@ import {
 } from 'mdbreact';
 import './MainLayout.scss';
 import RouteConstants from '../utils/RouteConstants';
-
+import Home from '../../src/components/home/Home'
 
 export default class extends React.Component {
   constructor(props) {
@@ -27,11 +27,9 @@ export default class extends React.Component {
   renderHeader() {
     return (
       <header>
+        <Home style={{background: "white"}}/>
         <MDBNavbar color="elegant-color" dark expand="md">
-          <MDBContainer>
-            <MDBNavbarBrand href="/">
-              <strong>Finance</strong>
-            </MDBNavbarBrand>
+          <MDBContainer> 
             <MDBNavbarToggler onClick={this.onClick} />
             <MDBCollapse isOpen={this.state.collapse} navbar>
               <MDBNavbarNav left> 

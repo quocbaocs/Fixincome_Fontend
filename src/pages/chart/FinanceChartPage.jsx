@@ -32,7 +32,7 @@ export default class extends Component {
       end: endRange
     }, () => {
       const { company, start, end } = this.state;
-      this.fetchOnlineData({ company, start, end });
+      this.fetchChartData({ company, start, end });
     });
   }
 
@@ -41,7 +41,7 @@ export default class extends Component {
       company: selectedCompany.value
     }, () => {
       const { company, start, end } = this.state;
-      this.fetchOnlineData({ company, start, end });
+      this.fetchChartData({ company, start, end });
     });
   }
 
@@ -87,9 +87,11 @@ export default class extends Component {
   fetchChartData({ company, start, end }) {
     fetch(`/${company}.csv`).then(async (res) => {
       const csvContent = await res.text();
-      this.updateChart(csvContent, start, end);
+      this.resolveLocalData(csvContent, start, end);
+      //this.updateChart(csvContent, start, end);
     }).catch(() => {
-      this.updateChart(finance, start, end);
+      this.resolveLocalData(finance, start, end);
+      //this.updateChart(finance, start, end);
     });
   }
 

@@ -5,17 +5,19 @@ import {
   MDBView, MDBMask
 } from 'mdbreact';
 import './HomePage.scss';
-
-
+import Home from '../../components/home/Home'
+import HomeBody from '../../components/home/HomeBody'
 export default class extends React.Component {
   render() {
     return (
-       
-      <MDBView src="image/background-img.jpg">
-        <MDBMask overlay="black-strong" className="flex-center flex-column text-white text-center">
-          <h2>Financial Technology</h2>
-        </MDBMask>
-      </MDBView>
+      
+      <div> 
+        
+        <MDBView src="image/background-img.jpg">
+         
+        </MDBView> 
+
+      </div>
     );
   }
 }
