@@ -17,6 +17,7 @@ import ForexChartPage from './pages/Forex/ForexChartPage';
 import GGM from './pages/GGM/GGM';
 import RouteConstants from './utils/RouteConstants';
 import InterestRateParityPage from './pages/Forex/InterestRateParityPage';
+import FXToolPage from './pages/Forex/FXToolPage';
 
 function App() {
   const routes = (
@@ -26,6 +27,7 @@ function App() {
       <Route path={RouteConstants.ggm} component={GGM} />
       <Route path={RouteConstants.forexCharts} component={ForexChartPage} />
       <Route path={RouteConstants.interestRateParity} component={InterestRateParityPage} />
+      <Route path={RouteConstants.fxTool} component={FXToolPage} />
       <Route path="/portfolio-management" component={PortfolioManagement} />
       <Redirect to="/home" />
     </Switch>

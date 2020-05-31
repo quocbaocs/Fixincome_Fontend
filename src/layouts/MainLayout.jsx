@@ -58,7 +58,7 @@ export default class extends React.Component {
                     </MDBDropdownToggle>
                     <MDBDropdownMenu left='true'>
                       <MDBDropdownItem href={RouteConstants.forexCharts}>Forex charts</MDBDropdownItem>
-                      <MDBDropdownItem href={RouteConstants.forexCharts}>Heat Maps</MDBDropdownItem>
+                      <MDBDropdownItem href={RouteConstants.fxTool}>FX Tool</MDBDropdownItem>
                       <MDBDropdownItem href={RouteConstants.interestRateParity}>Interest Rate Parity</MDBDropdownItem>
                     </MDBDropdownMenu>
                   </MDBDropdown> 

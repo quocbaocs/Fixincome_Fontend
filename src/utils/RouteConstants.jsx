@@ -9,6 +9,7 @@ const forex = '/forex';
 const forexCharts = `${forex}/forex-charts`;
 const heatMap = `${forex}/heat-map`;
 const interestRateParity = `${forex}/interest-rate-parity`;
+const fxTool = `${forex}/fx-tool`;
 
 export default {
   equity,
@@ -18,5 +19,6 @@ export default {
   forex,
   forexCharts,
   heatMap,
-  interestRateParity
+  interestRateParity,
+  fxTool
 };
