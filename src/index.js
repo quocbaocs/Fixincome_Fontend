@@ -6,6 +6,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+
 document.body.className = 'unique-color-dark';
 ReactDOM.render(<App />, document.getElementById('root'));
 

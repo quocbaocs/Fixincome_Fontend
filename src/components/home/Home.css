@@ -1,0 +1,10 @@
+/* Add an extra .carousel parent class to increase specifity
+   avoiding the use of !important flag. */
+   .carousel .carousel-indicators li {
+    background-color: #fff;
+    background-color: rgba(70, 70, 70, 0.25);
+  }
+  
+  .carousel .carousel-indicators .active {
+    background-color: #444;
+  }

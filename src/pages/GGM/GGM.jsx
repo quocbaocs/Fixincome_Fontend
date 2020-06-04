@@ -14,6 +14,19 @@ function computeP({ D, r, g } = {}) {
   return computeD1({ D, g }) / (r - g) || 0;
 }
 
+function computeAllD({D, g} = {}){
+  let listAllD = []
+  let i = 0; 
+  let D_month;
+  for (i = 0; i < 12; i++) { 
+    listAllD.push(D);
+    D_month = computeD1({ D, g });
+    D = D_month;
+  }
+  return listAllD || 0;
+
+}
+
 export default class extends React.Component {
   get chart() {
     return this.chartRef.current.chart;
