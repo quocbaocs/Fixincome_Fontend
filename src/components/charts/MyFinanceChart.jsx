@@ -21,8 +21,8 @@ export default class extends React.Component {
           height: 600
         },
         title: {
-          text: 'Stock price',
-          align: 'left'
+          text: 'STOCK DIAGRAM',
+          align: 'middle'
         },
         xaxis: {
           type: 'datetime',

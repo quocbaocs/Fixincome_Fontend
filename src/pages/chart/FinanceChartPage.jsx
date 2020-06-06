@@ -32,7 +32,7 @@ export default class extends Component {
       end: endRange
     }, () => {
       const { company, start, end } = this.state;
-      this.fetchChartData({ company, start, end });
+      this.fetchOnlineData({ company, start, end });
     });
   }
 
@@ -41,14 +41,14 @@ export default class extends Component {
       company: selectedCompany.value
     }, () => {
       const { company, start, end } = this.state;
-      this.fetchChartData({ company, start, end });
+      this.fetchOnlineData({ company, start, end });
     });
   }
 
   fetchOnlineData({ company, start, end }) {
     const req = unirest('GET', 'https://finnhub-realtime-stock-price.p.rapidapi.com/stock/candle');
 
-     
+
     req.query({
       symbol: company,
       from: new Date(start).getTime() / 1000,
@@ -88,16 +88,13 @@ export default class extends Component {
     fetch(`/${company}.csv`).then(async (res) => {
       const csvContent = await res.text();
       this.resolveLocalData(csvContent, start, end);
-      //this.updateChart(csvContent, start, end);
     }).catch(() => {
       this.resolveLocalData(finance, start, end);
-      //this.updateChart(finance, start, end);
     });
   }
 
   resolveLocalData(csvContent, start, end) {
     const csv = parseCSV(csvContent);
-     
 
     // ["Date", "Open", "High", "Low", "Close"]
     const rows = csv.slice(1);
@@ -124,19 +121,20 @@ export default class extends Component {
           <Row>
             <Col>
               <CompanySelect
-                className="m-3"
+                className="m-2"
                 onChange={this.handleCompanyChange}
               />
-            </Col>
-            <Col>
               <DateTimePicker
+                className="m-2"
                 start={start}
                 end={end}
                 onChange={this.handleDateRangeChange}
               />
             </Col>
+            <Col className="m-3">
+              <MyFinanceChart ref={this.chartRef} />
+            </Col>
           </Row>
-          <MyFinanceChart ref={this.chartRef} />
         </div>
       </div>
     );

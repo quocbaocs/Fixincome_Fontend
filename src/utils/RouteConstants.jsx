@@ -1,10 +1,11 @@
-//equity
+// equity
 const equity = '/equity';
 const stockCharts = `${equity}/stock-charts`;
 const financeReports = `${equity}/finance-reports`;
 const ggm = `${equity}/GGM`;
+const hm = `${equity}/HM`;
 
-//Forex
+// Forex
 const forex = '/forex';
 const forexCharts = `${forex}/forex-charts`;
 const heatMap = `${forex}/heat-map`;
@@ -16,6 +17,7 @@ export default {
   stockCharts,
   financeReports,
   ggm,
+  hm,
   forex,
   forexCharts,
   heatMap,

@@ -4,7 +4,7 @@ import makeAnimated from 'react-select/animated';
 import Select from 'react-select';
 import unirest from 'unirest';
 import './CompanySelect.scss';
- 
+
 
 const demoOptions = [
   { value: 'microsoft', label: 'Microsoft' },
@@ -39,7 +39,7 @@ export default class extends Component {
 
     req.end((res) => {
       if (res.error) throw new Error(res.error);
-      //console.log(res.body);
+      console.log(res.body);
       this.setState({
         companies: res.body.slice(0, 10).map((symbol) => ({
           label: symbol.description,
@@ -50,18 +50,19 @@ export default class extends Component {
   }
 
   render() {
-    //const { companies } = this.state;
-    //const { className, ...restProps } = this.props;
-    const { className, options, ...restProps } = this.props;
+    const { companies } = this.state;
+    const { className, ...restProps } = this.props;
+    // const { className, options, ...restProps } = this.props;
     return (
       <>
-        
+
         <Select
           className={className}
-          options={options || demoOptions}
+          // options={options || demoOptions}
+          options={companies}
           component={makeAnimated}
           {...restProps}
-          placeholder='Select the company'
+          placeholder="Select the company"
         />
       </>
     );

@@ -7,7 +7,7 @@ import {
 } from 'mdbreact';
 import './MainLayout.scss';
 import RouteConstants from '../utils/RouteConstants';
-import Home from '../../src/components/home/Home'
+import Home from '../components/home/Home';
 
 export default class extends React.Component {
   constructor(props) {
@@ -27,48 +27,49 @@ export default class extends React.Component {
   renderHeader() {
     return (
       <header>
-        <Home style={{background: "white"}}/>
+        <Home style={{ background: 'white' }} />
         <MDBNavbar color="elegant-color" dark expand="md">
-          <MDBContainer> 
+          <MDBContainer>
             <MDBNavbarToggler onClick={this.onClick} />
             <MDBCollapse isOpen={this.state.collapse} navbar>
-              <MDBNavbarNav left> 
+              <MDBNavbarNav left>
                 <MDBNavItem>
                   <MDBNavLink to="/home">Home</MDBNavLink>
-                </MDBNavItem> 
+                </MDBNavItem>
                 <MDBNavItem>
                   <MDBDropdown>
                     <MDBDropdownToggle nav caret>
                       <div className="d-none d-md-inline">Equity</div>
                     </MDBDropdownToggle>
-                    <MDBDropdownMenu left='true'>
+                    <MDBDropdownMenu left="true">
                       <MDBDropdownItem href={RouteConstants.stockCharts}>Stock charts</MDBDropdownItem>
                       <MDBDropdownItem href={RouteConstants.financeReports}>Financial reports</MDBDropdownItem>
                       <MDBDropdownItem href={RouteConstants.ggm}>GGM</MDBDropdownItem>
+                      <MDBDropdownItem href={RouteConstants.hm}>H-Model</MDBDropdownItem>
                     </MDBDropdownMenu>
                   </MDBDropdown>
-                </MDBNavItem> 
+                </MDBNavItem>
                 <MDBNavItem>
                   <MDBNavLink to="/fixed-income">Fix Income</MDBNavLink>
-                </MDBNavItem> 
+                </MDBNavItem>
                 <MDBNavItem>
-                <MDBDropdown>
+                  <MDBDropdown>
                     <MDBDropdownToggle nav caret>
                       <div className="d-none d-md-inline">Forex</div>
                     </MDBDropdownToggle>
-                    <MDBDropdownMenu left='true'>
+                    <MDBDropdownMenu left="true">
                       <MDBDropdownItem href={RouteConstants.forexCharts}>Forex charts</MDBDropdownItem>
                       <MDBDropdownItem href={RouteConstants.fxTool}>FX Tool</MDBDropdownItem>
                       <MDBDropdownItem href={RouteConstants.interestRateParity}>Interest Rate Parity</MDBDropdownItem>
                     </MDBDropdownMenu>
-                  </MDBDropdown> 
-                </MDBNavItem> 
+                  </MDBDropdown>
+                </MDBNavItem>
                 <MDBNavItem>
                   <MDBNavLink to="/derivatives">Derivatives</MDBNavLink>
-                </MDBNavItem> 
+                </MDBNavItem>
                 <MDBNavItem>
                   <MDBNavLink to="/portfolio-management">Portfolio Management</MDBNavLink>
-                </MDBNavItem> 
+                </MDBNavItem>
               </MDBNavbarNav>
             </MDBCollapse>
           </MDBContainer>

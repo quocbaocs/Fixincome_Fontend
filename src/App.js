@@ -18,13 +18,15 @@ import GGM from './pages/GGM/GGM';
 import RouteConstants from './utils/RouteConstants';
 import InterestRateParityPage from './pages/Forex/InterestRateParityPage';
 import FXToolPage from './pages/Forex/FXToolPage';
+import HM from './pages/H-Model/HM';
 
 function App() {
   const routes = (
     <Switch>
-      <Route path="/home" component={HomePage} /> 
+      <Route path="/home" component={HomePage} />
       <Route path={RouteConstants.stockCharts} component={FinanceChartPage} />
       <Route path={RouteConstants.ggm} component={GGM} />
+      <Route path={RouteConstants.hm} component={HM} />
       <Route path={RouteConstants.forexCharts} component={ForexChartPage} />
       <Route path={RouteConstants.interestRateParity} component={InterestRateParityPage} />
       <Route path={RouteConstants.fxTool} component={FXToolPage} />
