@@ -172,8 +172,8 @@ export default class extends React.Component {
 
     this.chart.updateOptions({
       stroke: {
-        curve: [...new Array(numLines + 4).fill('straight')],
-        width: [...new Array(numLines).fill(2), 4, 6, 0]
+        curve: [...new Array(numLines + 6).fill('straight')],
+        width: [...new Array(numLines).fill(2), 4, 6, 2]
       },
       markers: {
         size: [...new Array(numLines).fill(0), 6, 0, 8]
