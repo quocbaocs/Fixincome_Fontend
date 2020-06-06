@@ -79,7 +79,9 @@ export default class extends React.Component {
             <div className="row d-flex">
               <div className="col-md-5 order-md-last wrap-about align-items-stretch">
                 <div className="wrap-about-border  ">
-                  <div className="img" style={{ backgroundImage: `url(${"https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg"})` }}></div>
+                  <div className="img"  style ={ { backgroundImage: "url('./images/about.jpg')" } }>
+                    
+                  </div>
                   <div className="text">
                     <h3>Read Our Success Story for Inspiration</h3>
                     <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
@@ -94,16 +96,16 @@ export default class extends React.Component {
                 <div className="row mt-5">
                   <div className="col-lg-6">
                     <div className="services active text-center">
-                      <div className="icon mt-2 d-flex justify-content-center align-items-center"><span className="flaticon-collaboration"></span></div>
+                      <div className="icon mt-2 d-flex justify-content-center align-items-center"><span className="flaticon-search-engine"></span></div>
                       <div className="text media-body">
-                        <h3>Organization</h3>
+                        <h3>Stock</h3>
                         <p>Far far away, behind the word mountains, far from the countries Vokalia.</p>
                       </div>
                     </div>
                     <div className="services text-center">
                       <div className="icon mt-2 d-flex justify-content-center align-items-center"><span className="flaticon-analysis"></span></div>
                       <div className="text media-body">
-                        <h3>Risk Analysis</h3>
+                        <h3>Fix Income</h3>
                         <p>Far far away, behind the word mountains, far from the countries Vokalia.</p>
                       </div>
                     </div>
@@ -112,14 +114,14 @@ export default class extends React.Component {
                     <div className="services text-center">
                       <div className="icon mt-2 d-flex justify-content-center align-items-center"><span className="flaticon-search-engine"></span></div>
                       <div className="text media-body">
-                        <h3>Marketing Strategy</h3>
+                        <h3>Fx</h3>
                         <p>Far far away, behind the word mountains, far from the countries Vokalia.</p>
                       </div>
                     </div>
                     <div className="services text-center">
                       <div className="icon mt-2 d-flex justify-content-center align-items-center"><span className="flaticon-handshake"></span></div>
                       <div className="text media-body">
-                        <h3>Capital Market</h3>
+                        <h3>Portfolio Management</h3>
                         <p>Far far away, behind the word mountains, far from the countries Vokalia.</p>
                       </div>
                     </div>
@@ -135,14 +137,15 @@ export default class extends React.Component {
           <div className="container">
             <div className="row justify-content-center mb-5 pb-2">
               <div className="col-md-8 text-center heading-section ">
-                <h2 className="mb-4"><span>Recent</span> Blog</h2>
+                <h2 className="mb-4"> Recent Announcement</h2>
                 <p>Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>
               </div>
             </div>
             <div className="row">
               <div className="col-md-6 col-lg-4 ">
                 <div className="blog-entry">
-                  <a href="blog-single.html" className="block-20 d-flex align-items-end" style={{ backgroundImage: `url(${"../public/image/background-img.jpg"})` }}>
+                  <a href="blog-single.html" className="block-20 d-flex align-items-end" style ={ { backgroundImage: "url('./images/bg_5.jpg')" } }>
+                    
                     <div className="meta-date text-center p-2">
                       <span className="day">26</span>
                       <span className="mos">June</span>
@@ -164,7 +167,7 @@ export default class extends React.Component {
               </div>
               <div className="col-md-6 col-lg-4 ">
                 <div className="blog-entry">
-                  <a href="blog-single.html" className="block-20 d-flex align-items-end" style={{ backgroundImage: `url(${"../public/image/background-img.jpg"})` }}>
+                  <a href="blog-single.html" className="block-20 d-flex align-items-end" style ={ { backgroundImage: "url('./images/bg_2.jpg')" } }>
                     <div className="meta-date text-center p-2">
                       <span className="day">26</span>
                       <span className="mos">June</span>
@@ -186,7 +189,7 @@ export default class extends React.Component {
               </div>
               <div className="col-md-6 col-lg-4 ">
                 <div className="blog-entry">
-                  <a href="blog-single.html" className="block-20 d-flex align-items-end" style={{ backgroundImage: `url(${"../public/image/background-img.jpg"})` }}>
+                  <a href="blog-single.html" className="block-20 d-flex align-items-end" style ={ { backgroundImage: "url('./images/bg_1.jpg')" } }>
                     <div className="meta-date text-center p-2">
                       <span className="day">26</span>
                       <span className="mos">June</span>
