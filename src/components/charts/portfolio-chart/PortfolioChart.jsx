@@ -111,14 +111,14 @@ export default class extends React.Component {
   }
 
   updateChart(csvContent) {
-    const csv = parseCSV(csvContent); 
+    const csv = parseCSV(csvContent);
 
     // ["w", "mean12", "std12", "mean13", "std13", "mean23", "std23"]
     const headerRow = csv[0];
-    const rows = csv.slice(1);
+    const rows = csv.slice(-1)[0];
 
     const k = 2;
-    const Ckn = (headerRow.length - 1) / 2;
+    const Ckn = (headerRow.length - 8) / 2;
     const numAssets = giaiPTBac2(1, -1, -Ckn * k);
 
     const portfolioes = [];
@@ -156,20 +156,69 @@ export default class extends React.Component {
       }
     }
 
-    const numPortfolioes = portfolioes.length;
+    // Assets line
+    portfolioes.push(
+      { name: 'Assets', data: assets }
+    );
+
+    const frontierLine = this.buildFrontierLine(csv);
+    portfolioes.push(frontierLine);
+
+    const minStdLine = this.buildMinStdPoint(csv);
+    portfolioes.push(minStdLine);
+
+    const cmlLine = this.buildCMLLine(csv);
+    portfolioes.push(cmlLine);
+
     this.chart.updateOptions({
       stroke: {
-        curve: 'smooth',
-        width: new Array(numPortfolioes + 1).fill(2)
+        curve: [...new Array(numLines + 6).fill('straight')],
+        width: [...new Array(numLines).fill(2), 4, 6, 2]
       },
       markers: {
-        size: [...new Array(numPortfolioes).fill(0), 6]
+        size: [...new Array(numLines).fill(0), 6, 0, 8]
       }
     });
+
     this.chart.updateSeries([
-      ...portfolioes,
-      { name: 'Assets', data: assets }
+      ...portfolioes
     ]);
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  buildFrontierLine(csv) {
+    const wArr = csv[1];
+    const stdArr = csv[2];
+    const meanArr = csv[3];
+    const data = wArr.map((w, index) => [
+      meanArr[index], stdArr[index]
+    ]);
+    return {
+      name: 'frontier',
+      data
+    };
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  buildMinStdPoint(csv) {
+    return {
+      name: 'Min Std',
+      data: [[csv[8][0], csv[7][0]]]
+    };
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  buildCMLLine(csv) {
+    const wArr = csv[1];
+    const stdArr = csv[5];
+    const meanArr = csv[6];
+    const data = wArr.map((w, index) => [
+      meanArr[index], stdArr[index]
+    ]);
+    return {
+      name: 'CML',
+      data
+    };
   }
 
   render() {
