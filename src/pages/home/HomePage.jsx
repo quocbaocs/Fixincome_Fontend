@@ -1,87 +1,82 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable max-len */
 import React from 'react';
 import {
+  MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBCarouselCaption,
   MDBView, MDBMask
 } from 'mdbreact';
-import {
-  MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardImage,
-  MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn
-} from "mdbreact";
-import { MDBCarouselCaption } from
-"mdbreact";
 import './HomePage.scss';
 import '../../assets/css/flaticon.css';
-import Home from '../../components/home/Home'
- 
+import Home from '../../components/home/Home';
+
+
 export default class extends React.Component {
   render() {
     return (
 
-      <div  style={{backgroundColor:'white'}}> 
-      
-          <MDBCarousel
-            activeItem={1}
-            length={3}
-            showControls={false}
-            showIndicators={true}
-            className=" container"
-          >
-            <MDBCarouselInner>
-              <MDBCarouselItem itemId="1">
-                <MDBView>
-                  <img
-                    className="d-block w-100 "
-                    src="./images/image_1.jpg"
-                    alt="First slide"
-                     
-                  />
-                   <MDBMask overlay="black-slight" />
-                </MDBView>
-                <MDBCarouselCaption>
-                  <h3 className="h3-responsive ">Light mask</h3>
-                  <p>First text</p>
-                </MDBCarouselCaption>
-              </MDBCarouselItem>
-              <MDBCarouselItem itemId="2">
-                <MDBView>
-                  <img
-                    className="d-block w-100"
-                    src="./images/image_4.jpg"
-                    alt="Second slide"
-                  />
-                  <MDBMask overlay="black-slight" />
-                </MDBView>
-                <MDBCarouselCaption>
-                  <h3 className="h3-responsive">Strong mask</h3>
-                  <p>Second text</p>
-                </MDBCarouselCaption>
-              </MDBCarouselItem>
-              <MDBCarouselItem itemId="3">
-                <MDBView>
-                  <img
-                    className="d-block w-100"
-                    src="./images/image_6.jpg"
-                    alt="Third slide"
-                  />
-                  <MDBMask overlay="black-slight" />
-                </MDBView>
-                <MDBCarouselCaption>
-                  <h3 className="h3-responsive">Slight Mast</h3>
-                  <p>Third text</p>
-                </MDBCarouselCaption>
-              </MDBCarouselItem>
-            </MDBCarouselInner>
-          </MDBCarousel>
-        
+      <div style={{ backgroundColor: 'white' }}>
+
+        <MDBCarousel
+          activeItem={1}
+          length={3}
+          showControls={false}
+          showIndicators
+          className=" container"
+        >
+          <MDBCarouselInner>
+            <MDBCarouselItem itemId="1">
+              <MDBView>
+                <img
+                  className="d-block w-100 "
+                  src="./images/image_1.jpg"
+                  alt="First slide"
+
+                />
+                <MDBMask overlay="black-slight" />
+              </MDBView>
+              <MDBCarouselCaption>
+                <h3 className="h3-responsive ">Light mask</h3>
+                <p>First text</p>
+              </MDBCarouselCaption>
+            </MDBCarouselItem>
+            <MDBCarouselItem itemId="2">
+              <MDBView>
+                <img
+                  className="d-block w-100"
+                  src="./images/image_4.jpg"
+                  alt="Second slide"
+                />
+                <MDBMask overlay="black-slight" />
+              </MDBView>
+              <MDBCarouselCaption>
+                <h3 className="h3-responsive">Strong mask</h3>
+                <p>Second text</p>
+              </MDBCarouselCaption>
+            </MDBCarouselItem>
+            <MDBCarouselItem itemId="3">
+              <MDBView>
+                <img
+                  className="d-block w-100"
+                  src="./images/image_6.jpg"
+                  alt="Third slide"
+                />
+                <MDBMask overlay="black-slight" />
+              </MDBView>
+              <MDBCarouselCaption>
+                <h3 className="h3-responsive">Slight Mast</h3>
+                <p>Third text</p>
+              </MDBCarouselCaption>
+            </MDBCarouselItem>
+          </MDBCarouselInner>
+        </MDBCarousel>
+
         <section className="ftco-section" style={{ backgroundColor: 'white' }}>
           <div className="container">
             <div className="row d-flex">
               <div className="col-md-5 order-md-last wrap-about align-items-stretch">
                 <div className="wrap-about-border  ">
-                  <div className="img"  style ={ { backgroundImage: "url('./images/about.jpg')" } }>
-                    
-                  </div>
+                  <div className="img" style={{ backgroundImage: 'url(\'./images/about.jpg\')' }} />
                   <div className="text">
                     <h3>Read Our Success Story for Inspiration</h3>
                     <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
@@ -96,14 +91,14 @@ export default class extends React.Component {
                 <div className="row mt-5">
                   <div className="col-lg-6">
                     <div className="services active text-center">
-                      <div className="icon mt-2 d-flex justify-content-center align-items-center"><span className="flaticon-search-engine"></span></div>
+                      <div className="icon mt-2 d-flex justify-content-center align-items-center"><span className="flaticon-search-engine" /></div>
                       <div className="text media-body">
                         <h3>Stock</h3>
                         <p>Far far away, behind the word mountains, far from the countries Vokalia.</p>
                       </div>
                     </div>
                     <div className="services text-center">
-                      <div className="icon mt-2 d-flex justify-content-center align-items-center"><span className="flaticon-analysis"></span></div>
+                      <div className="icon mt-2 d-flex justify-content-center align-items-center"><span className="flaticon-analysis" /></div>
                       <div className="text media-body">
                         <h3>Fix Income</h3>
                         <p>Far far away, behind the word mountains, far from the countries Vokalia.</p>
@@ -112,14 +107,14 @@ export default class extends React.Component {
                   </div>
                   <div className="col-lg-6">
                     <div className="services text-center">
-                      <div className="icon mt-2 d-flex justify-content-center align-items-center"><span className="flaticon-search-engine"></span></div>
+                      <div className="icon mt-2 d-flex justify-content-center align-items-center"><span className="flaticon-search-engine" /></div>
                       <div className="text media-body">
                         <h3>Fx</h3>
                         <p>Far far away, behind the word mountains, far from the countries Vokalia.</p>
                       </div>
                     </div>
                     <div className="services text-center">
-                      <div className="icon mt-2 d-flex justify-content-center align-items-center"><span className="flaticon-handshake"></span></div>
+                      <div className="icon mt-2 d-flex justify-content-center align-items-center"><span className="flaticon-handshake" /></div>
                       <div className="text media-body">
                         <h3>Portfolio Management</h3>
                         <p>Far far away, behind the word mountains, far from the countries Vokalia.</p>
@@ -144,8 +139,8 @@ export default class extends React.Component {
             <div className="row">
               <div className="col-md-6 col-lg-4 ">
                 <div className="blog-entry">
-                  <a href="blog-single.html" className="block-20 d-flex align-items-end" style ={ { backgroundImage: "url('./images/bg_5.jpg')" } }>
-                    
+                  <a href="blog-single.html" className="block-20 d-flex align-items-end" style={{ backgroundImage: 'url(\'./images/bg_5.jpg\')' }}>
+
                     <div className="meta-date text-center p-2">
                       <span className="day">26</span>
                       <span className="mos">June</span>
@@ -156,10 +151,10 @@ export default class extends React.Component {
                     <h3 className="heading"><a href="#">Finance And Legal Working Streams Occur Throughout</a></h3>
                     <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
                     <div className="d-flex align-items-center mt-4">
-                      <p className="mb-0"><a href="#" className="btn btn-primary">Read More <span className="ion-ios-arrow-round-forward"></span></a></p>
+                      <p className="mb-0"><a href="#" className="btn btn-primary">Read More <span className="ion-ios-arrow-round-forward" /></a></p>
                       <p className="ml-auto mb-0">
                         <a href="#" className="mr-2">Admin</a>
-                        <a href="#" className="meta-chat"><span className="icon-chat"></span> 3</a>
+                        <a href="#" className="meta-chat"><span className="icon-chat" /> 3</a>
                       </p>
                     </div>
                   </div>
@@ -167,7 +162,7 @@ export default class extends React.Component {
               </div>
               <div className="col-md-6 col-lg-4 ">
                 <div className="blog-entry">
-                  <a href="blog-single.html" className="block-20 d-flex align-items-end" style ={ { backgroundImage: "url('./images/bg_2.jpg')" } }>
+                  <a href="blog-single.html" className="block-20 d-flex align-items-end" style={{ backgroundImage: 'url(\'./images/bg_2.jpg\')' }}>
                     <div className="meta-date text-center p-2">
                       <span className="day">26</span>
                       <span className="mos">June</span>
@@ -178,10 +173,10 @@ export default class extends React.Component {
                     <h3 className="heading"><a href="#">Finance And Legal Working Streams Occur Throughout</a></h3>
                     <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
                     <div className="d-flex align-items-center mt-4">
-                      <p className="mb-0"><a href="#" className="btn btn-primary">Read More <span className="ion-ios-arrow-round-forward"></span></a></p>
+                      <p className="mb-0"><a href="#" className="btn btn-primary">Read More <span className="ion-ios-arrow-round-forward" /></a></p>
                       <p className="ml-auto mb-0">
                         <a href="#" className="mr-2">Admin</a>
-                        <a href="#" className="meta-chat"><span className="icon-chat"></span> 3</a>
+                        <a href="#" className="meta-chat"><span className="icon-chat" /> 3</a>
                       </p>
                     </div>
                   </div>
@@ -189,7 +184,7 @@ export default class extends React.Component {
               </div>
               <div className="col-md-6 col-lg-4 ">
                 <div className="blog-entry">
-                  <a href="blog-single.html" className="block-20 d-flex align-items-end" style ={ { backgroundImage: "url('./images/bg_1.jpg')" } }>
+                  <a href="blog-single.html" className="block-20 d-flex align-items-end" style={{ backgroundImage: 'url(\'./images/bg_1.jpg\')' }}>
                     <div className="meta-date text-center p-2">
                       <span className="day">26</span>
                       <span className="mos">June</span>
@@ -200,10 +195,10 @@ export default class extends React.Component {
                     <h3 className="heading"><a href="#">Finance And Legal Working Streams Occur Throughout</a></h3>
                     <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
                     <div className="d-flex align-items-center mt-4">
-                      <p className="mb-0"><a href="#" className="btn btn-primary">Read More <span className="ion-ios-arrow-round-forward"></span></a></p>
+                      <p className="mb-0"><a href="#" className="btn btn-primary">Read More <span className="ion-ios-arrow-round-forward" /></a></p>
                       <p className="ml-auto mb-0">
                         <a href="#" className="mr-2">Admin</a>
-                        <a href="#" className="meta-chat"><span className="icon-chat"></span> 3</a>
+                        <a href="#" className="meta-chat"><span className="icon-chat" /> 3</a>
                       </p>
                     </div>
                   </div>
@@ -214,8 +209,7 @@ export default class extends React.Component {
         </section>
 
 
-
-        <Home></Home>
+        <Home />
 
       </div>
     );
