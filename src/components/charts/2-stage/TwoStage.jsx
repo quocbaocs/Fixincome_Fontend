@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react';
 import ReactApexChart from 'react-apexcharts';
-import './GGMchart.scss';
 
 
 export default class extends React.Component {
@@ -30,6 +29,18 @@ export default class extends React.Component {
         dataLabels: {
           enabled: false
         },
+        fill: {
+          type: 'gradient',
+          gradient: {
+            shade: 'dark',
+            gradientToColors: ['#FDD835'],
+            shadeIntensity: 1,
+            type: 'horizontal',
+            opacityFrom: 1,
+            opacityTo: 1,
+            stops: [0, 100, 100, 100]
+          }
+        },
         stroke: {
           curve: 'straight',
           width: 3
@@ -38,7 +49,7 @@ export default class extends React.Component {
           size: 6
         },
         title: {
-          text: 'DIVIDEND IN THE NEXT PERIOD',
+          text: 'DIVIDEND GROWTH',
           align: 'middle'
         },
         // grid: {

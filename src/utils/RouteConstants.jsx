@@ -4,6 +4,7 @@ const stockCharts = `${equity}/stock-charts`;
 const financeReports = `${equity}/finance-reports`;
 const ggm = `${equity}/GGM`;
 const hm = `${equity}/HM`;
+const tsm = `${equity}/TwoStage`;
 
 // Forex
 const forex = '/forex';
@@ -22,5 +23,6 @@ export default {
   forexCharts,
   heatMap,
   interestRateParity,
-  fxTool
+  fxTool,
+  tsm
 };

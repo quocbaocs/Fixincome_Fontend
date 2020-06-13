@@ -2,9 +2,8 @@
 import React from 'react';
 import './HM.scss';
 import {
-  MDBTable, MDBTableHead, MDBTableBody, Row, Col, MDBContainer, MDBInputGroup, MDBInput, MDBTypography
+  MDBTable, MDBTableHead, MDBTableBody, Row, Col, MDBContainer, MDBInputGroup, MDBTypography
 } from 'mdbreact';
-import Select from 'react-select';
 import HModelchart from '../../components/charts/HModel-chart/HModelchart';
 
 
@@ -97,10 +96,10 @@ export default class extends React.Component {
     return (
       <Row className="m-5">
         <Col className="col-3">
-          <Row className="card mt-3 ">
+          <Row className="card mt-4 ">
             <MDBContainer>
               <MDBInputGroup
-                label="The most recent dividend payment"
+                label="The Most Recent Dividend Payment"
                 containerClassName="mb-3 row-3"
                 append="$"
                 inputs={(
@@ -111,7 +110,7 @@ export default class extends React.Component {
               />
             </MDBContainer>
             <MDBInputGroup
-              label="The initial high and terminal growth rate"
+              label="The Initial High And Terminal Growth Rate"
               containerClassName="mb-3 col-10"
               append="%"
               inputs={(
@@ -123,7 +122,7 @@ export default class extends React.Component {
             />
             <MDBContainer>
               <MDBInputGroup
-                label="The discount rate"
+                label="The Discount Rate"
                 containerClassName="mb-3 row-3"
                 append="%"
                 inputs={(
@@ -151,7 +150,7 @@ export default class extends React.Component {
             <MDBTable>
               <MDBTableHead color="secondary-color-dark" textWhite>
                 <tr>
-                  <th>Stock value($)</th>
+                  <th>Stock Value($)</th>
                 </tr>
               </MDBTableHead>
               <MDBTableBody>
@@ -165,7 +164,7 @@ export default class extends React.Component {
                   </td>
                 </tr>
               </MDBTableBody>
-              <MDBTableHead color="secondary-color-dark" textWhite>
+              {/* <MDBTableHead color="secondary-color-dark" textWhite>
                 <tr>
                   <th>Step size</th>
                 </tr>
@@ -180,7 +179,7 @@ export default class extends React.Component {
                     </MDBTypography>
                   </td>
                 </tr>
-              </MDBTableBody>
+              </MDBTableBody> */}
             </MDBTable>
           </Row>
         </Col>

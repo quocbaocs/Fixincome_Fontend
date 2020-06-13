@@ -36,8 +36,8 @@ export default class extends React.Component {
           size: 6
         },
         title: {
-          text: 'H-Model',
-          align: 'left'
+          text: 'GROWTH RATE',
+          align: 'middle'
         },
         // grid: {
         //   row: {

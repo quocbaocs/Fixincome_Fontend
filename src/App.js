@@ -9,6 +9,7 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 import './App.css';
 
+
 import HomePage from './pages/home/HomePage';
 import FinanceChartPage from './pages/chart/FinanceChartPage';
 import MainLayout from './layouts/MainLayout';
@@ -19,6 +20,8 @@ import RouteConstants from './utils/RouteConstants';
 import InterestRateParityPage from './pages/Forex/InterestRateParityPage';
 import FXToolPage from './pages/Forex/FXToolPage';
 import HM from './pages/H-Model/HM';
+import TwoStage from './pages/2-stage/TwoStage';
+
 
 function App() {
   const routes = (
@@ -27,6 +30,7 @@ function App() {
       <Route path={RouteConstants.stockCharts} component={FinanceChartPage} />
       <Route path={RouteConstants.ggm} component={GGM} />
       <Route path={RouteConstants.hm} component={HM} />
+      <Route path={RouteConstants.tsm} component={TwoStage} />
       <Route path={RouteConstants.forexCharts} component={ForexChartPage} />
       <Route path={RouteConstants.interestRateParity} component={InterestRateParityPage} />
       <Route path={RouteConstants.fxTool} component={FXToolPage} />

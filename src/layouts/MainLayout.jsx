@@ -4,7 +4,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {
-  MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBContainer, MDBDropdownToggle, MDBDropdown, MDBDropdownMenu, MDBDropdownItem
+  MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBContainer, MDBDropdownToggle, MDBDropdown, MDBDropdownMenu, MDBDropdownItem, MDBIcon
 } from 'mdbreact';
 import './MainLayout.scss';
 import './icomoon.css';
@@ -82,10 +82,18 @@ export default class extends React.Component {
                       <div className="d-none d-md-inline">Equity</div>
                     </MDBDropdownToggle>
                     <MDBDropdownMenu left="true">
-                      <MDBDropdownItem href={RouteConstants.stockCharts}>Stock charts</MDBDropdownItem>
+                      <MDBDropdownItem href={RouteConstants.stockCharts}>Stock</MDBDropdownItem>
                       <MDBDropdownItem href={RouteConstants.financeReports}>Financial reports</MDBDropdownItem>
-                      <MDBDropdownItem href={RouteConstants.ggm}>GGM</MDBDropdownItem>
-                      <MDBDropdownItem href={RouteConstants.hm}>H-Model</MDBDropdownItem>
+                      <MDBDropdown dropright>
+                        <MDBDropdownToggle nav color>
+                          <p className="black-text">Model</p>
+                        </MDBDropdownToggle>
+                        <MDBDropdownMenu basic>
+                          <MDBDropdownItem href={RouteConstants.ggm}>GGM</MDBDropdownItem>
+                          <MDBDropdownItem href={RouteConstants.hm}>H-Model</MDBDropdownItem>
+                          <MDBDropdownItem href={RouteConstants.tsm}>Two Stage Model</MDBDropdownItem>
+                        </MDBDropdownMenu>
+                      </MDBDropdown>
                     </MDBDropdownMenu>
                   </MDBDropdown>
                 </MDBNavItem>

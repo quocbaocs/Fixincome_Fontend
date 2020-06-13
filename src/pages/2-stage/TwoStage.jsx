@@ -1,31 +1,119 @@
 import React from 'react';
-import './GGM.scss';
 import {
   MDBTable, MDBTableHead, MDBTableBody, Row, Col, MDBContainer, MDBInputGroup,
   MDBTypography
 } from 'mdbreact';
 import Select from 'react-select';
-import GGMchart from '../../components/charts/GGM-chart/GGMchart';
+import TwoStage from '../../components/charts/2-stage/TwoStage';
 
 
-function computeD1({ D, g } = {}) {
-  return +D * (1 + +(g / 100)) || 0;
+function computeDiv({ D, g1 } = {}) {
+  return +D * (1 + (+g1 / 100)) || 0;
 }
 
-function computeP({ D, r, g } = {}) {
-  return computeD1({ D, g }) / ((r / 100) - (g / 100)) || 0;
+// Div end of high growth
+function computeDivL({ D, g1, t } = {}) {
+  return +D * ((1 + (+g1 / 100)) ** t) || 0;
 }
 
-function computeAllD({ D, g } = {}) {
-  const listAllD = [];
-  let i = 0;
+// Div first of low growth
+function computeDivN({
+  D, g1, g2, t
+} = {}) {
+  const a = computeDivL({ D, g1, t });
+  return +a * (1 + (+g2 / 100)) || 0;
+}
+
+// Stock value end of high growth
+function computeGGM({
+  D, g1, g2, t, r
+} = {}) {
+  const a = computeDivN({
+    D, g1, g2, t
+  });
+  return +a / ((r / 100) - (g2 / 100));
+}
+// Value low growth
+function computeSt({
+  D, g1, g2, t, r
+} = {}) {
+  const a = computeGGM({
+    D, g1, g2, t, r
+  });
+  return +a / (1 + (+r / 100)) ** t;
+}
+
+// Value high grwoth
+function computeS1({
+  D, g1, t, r
+} = {}) {
+  let i;
+  let tong = 0;
   let Dnext;
-  for (i = 0; i < 12; i++) {
+  for (i = 1; i < +t + 1; i++) {
+    Dnext = computeDiv({ D, g1 });
+    D = Dnext;
+    const P = D / ((1 + (r / 100)) ** i);
+    tong += P;
+  }
+  return tong;
+}
+
+// Stock value
+function computeValue({
+  D, g1, g2, r, t
+} = {}) {
+  const a = computeS1({
+    D, g1, t, r
+  });
+  const b = computeSt({
+    D, g1, g2, t, r
+  });
+  const c = +a + +b;
+  return c;
+}
+
+// Data for charting (high growth)
+function dataD1({ D, g1, t } = {}) {
+  const listAllD = [];
+  let i;
+  let Dnext;
+  for (i = 0; i < +t + 1; i++) {
     listAllD.push(D);
-    Dnext = computeD1({ D, g });
+    Dnext = computeDiv({ D, g1 });
     D = Dnext;
   }
   return listAllD;
+}
+
+// Data for charting (low growth)
+function dataD2({
+  D, g1, g2, t
+} = {}) {
+  const listAllD2 = [];
+  let i;
+  let Dnext;
+  let Div = computeDivN({
+    D, g1, g2, t
+  });
+  for (i = 0; i < +t + 1 + 3; i++) {
+    listAllD2.push(Div);
+    Dnext = computeDiv({ D: Div, g1: g2 });
+    Div = Dnext;
+  }
+  return listAllD2;
+}
+
+// Concatenated array for charting
+function D1D2({
+  D, g1, g2, t
+} = {}) {
+  const a = dataD1({ D, g1, t });
+  const b = dataD2({
+    D, g1, g2, t
+  });
+  const c = a.concat(b);
+  return c;
 }
 
 export default class extends React.Component {
@@ -37,17 +125,12 @@ export default class extends React.Component {
     super(props);
     this.chartRef = React.createRef();
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleCompanyChange = this.handleCompanyChange.bind(this);
     this.state = {
-      selectedCompany: '',
-      companies: [
-        { name: 'Google', P: 67.2 },
-        { name: 'Microsoft', P: 55.1 },
-        { name: 'Apple', P: 83.5 }
-      ],
-      D: 3,
-      r: 10,
-      g: 8
+      D: 1,
+      r: 8,
+      g1: 10,
+      g2: 6,
+      t: 3
     };
   }
 
@@ -64,15 +147,19 @@ export default class extends React.Component {
     });
   }
 
-  handleCompanyChange(company) {
-    this.setState({
-      selectedCompany: company
-    });
-  }
+  // handleCompanyChange(company) {
+  //   this.setState({
+  //     selectedCompany: company
+  //   });
+  // }
 
   updateChart() {
-    const { D, g } = this.state;
-    const data = computeAllD({ D, g });
+    const {
+      D, g1, g2, t
+    } = this.state;
+    const data = D1D2({
+      D, g1, g2, t
+    });
     this.chart.updateSeries([
       {
         name: 'All D',
@@ -83,10 +170,8 @@ export default class extends React.Component {
 
   render() {
     const {
-      companies, selectedCompany, D, r, g
+      D, r, g1, g2, t
     } = this.state;
-    const companyOptions = companies.map((companyI) => ({ label: companyI.name, value: companyI }));
-    const company = selectedCompany.value;
 
     return (
       <Row className="m-5">
@@ -119,13 +204,37 @@ export default class extends React.Component {
               </MDBTableBody>
               <MDBTableHead color="primary-color" textWhite>
                 <tr>
-                  <th>Growth Rate In Dividends(%)</th>
+                  <th>High Growth Rate(%)</th>
                 </tr>
               </MDBTableHead>
               <MDBTableBody>
                 <tr>
                   <td>
-                    <input name="g" value={g} onChange={this.handleInputChange} type="number" min="0" step="0.1" pre />
+                    <input name="g1" value={g1} onChange={this.handleInputChange} type="number" min="0" step="0.1" pre />
+                  </td>
+                </tr>
+              </MDBTableBody>
+              <MDBTableHead color="primary-color" textWhite>
+                <tr>
+                  <th>Low Growth Rate(%)</th>
+                </tr>
+              </MDBTableHead>
+              <MDBTableBody>
+                <tr>
+                  <td>
+                    <input name="g2" value={g2} onChange={this.handleInputChange} type="number" min="0" step="0.1" pre />
+                  </td>
+                </tr>
+              </MDBTableBody>
+              <MDBTableHead color="primary-color" textWhite>
+                <tr>
+                  <th>Time</th>
+                </tr>
+              </MDBTableHead>
+              <MDBTableBody>
+                <tr>
+                  <td>
+                    <input name="t" value={t} onChange={this.handleInputChange} type="number" min="0" step="0.1" pre />
                   </td>
                 </tr>
               </MDBTableBody>
@@ -136,7 +245,10 @@ export default class extends React.Component {
               </MDBTableHead>
               <MDBTableBody>
                 <tr>
-                  <MDBTypography tag="h5" variant="h5" className="col-5">{computeP({ D, r, g }).toFixed(3)}</MDBTypography>
+                  <MDBTypography tag="h5" variant="h5" className="col-5">{computeValue({
+                    D, g1, g2, r, t
+                  }).toFixed(2)}
+                  </MDBTypography>
                 </tr>
                 <div className="d-flex">
                   <datadddd
@@ -170,7 +282,7 @@ export default class extends React.Component {
           </Row> */}
         </Col>
         <Col>
-          <GGMchart ref={this.chartRef} />
+          <TwoStage ref={this.chartRef} />
         </Col>
       </Row>
     );

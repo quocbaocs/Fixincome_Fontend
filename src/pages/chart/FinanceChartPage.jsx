@@ -116,7 +116,7 @@ export default class extends Component {
   render() {
     const { start, end } = this.state;
     return (
-      <div className="">
+      <div className="mt-5 ml-5">
         <div>
           <Row>
             <Col>
