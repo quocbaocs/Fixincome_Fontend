@@ -13,11 +13,14 @@ class Chart_Yield extends Component {
             height:260,
 			theme: "light2",
 			title: {
-				text: "bootstrapping yield curve"
+				text: "Zero curve"
+			},
+			axisX: {
+				title: "Maturity in Years",
+				includeZero: false
 			},
 			axisY: {
-				title: "Price in USD",
-				prefix: "$",
+				title: "Zero Rate (%)",
 				includeZero: false
 			},
 			data: [{
