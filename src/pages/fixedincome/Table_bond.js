@@ -29,14 +29,12 @@ class Table_bond extends Component {
         <MDBTableHead color="primary-color" textWhite>
           <tr>
             <th>Id</th>
-            <th>asset_code</th>
-            <th>maturity</th>
-            <th>issuedate</th>
-            <th>couponrate</th>
-            <th>price</th>
-            <th>yeild</th>
-            <th>duration</th>
-            <th>convexity</th>
+            <th>Asset code</th>
+            <th>Maturity</th>
+            <th>Issuedate</th>
+            <th>Couponrate</th>
+            <th>Price</th>
+            <th>Yield</th>
           </tr>
         </MDBTableHead>
         <MDBTableBody textWhite>
@@ -49,8 +47,6 @@ class Table_bond extends Component {
             <td>{item.couponrate}</td>
             <td>{item.price}</td>
             <td>{item.yeild}</td>
-            <td>{item.duration}</td>
-            <td>{item.convexity}</td>
           </tr>
         ))}
         </MDBTableBody>
