@@ -21,12 +21,14 @@ import InterestRateParityPage from './pages/Forex/InterestRateParityPage';
 import FXToolPage from './pages/Forex/FXToolPage';
 import HM from './pages/H-Model/HM';
 import TwoStage from './pages/2-stage/TwoStage';
+import Fixedincome from './pages/fixedincome/Fixedincome'
 
 
 function App() {
   const routes = (
     <Switch>
       <Route path="/home" component={HomePage} />
+      <Route path={RouteConstants.fixincome} component={Fixedincome}/>
       <Route path={RouteConstants.stockCharts} component={FinanceChartPage} />
       <Route path={RouteConstants.ggm} component={GGM} />
       <Route path={RouteConstants.hm} component={HM} />

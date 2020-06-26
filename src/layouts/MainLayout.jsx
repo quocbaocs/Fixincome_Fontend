@@ -98,7 +98,7 @@ export default class extends React.Component {
                   </MDBDropdown>
                 </MDBNavItem>
                 <MDBNavItem>
-                  <MDBNavLink to="/fixed-income">Fix Income</MDBNavLink>
+                  <MDBNavLink to="/fixedincome">Fix Income</MDBNavLink>
                 </MDBNavItem>
                 <MDBNavItem>
                   <MDBDropdown>
