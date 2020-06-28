@@ -12,12 +12,13 @@ const demoOptions = [
   { value: 'apple', label: 'Apple' }
 ];
 
+let cachedCompanies = [];
 
 export default class extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      companies: []
+      companies: cachedCompanies
     };
   }
 
@@ -26,6 +27,8 @@ export default class extends Component {
   }
 
   fetchCompanies() {
+    if (cachedCompanies.length > 0) return;
+
     const req = unirest('GET', 'https://finnhub-realtime-stock-price.p.rapidapi.com/stock/symbol');
 
     req.query({
@@ -39,12 +42,13 @@ export default class extends Component {
 
     req.end((res) => {
       if (res.error) throw new Error(res.error);
-      console.log(res.body);
+      // console.log(res.body);
+      cachedCompanies = res.body.slice(0, 10).map((symbol) => ({
+        label: symbol.description,
+        value: symbol.symbol
+      }));
       this.setState({
-        companies: res.body.slice(0, 10).map((symbol) => ({
-          label: symbol.description,
-          value: symbol.symbol
-        }))
+        companies: cachedCompanies
       });
     });
   }
@@ -55,7 +59,6 @@ export default class extends Component {
     // const { className, options, ...restProps } = this.props;
     return (
       <>
-
         <Select
           className={className}
           // options={options || demoOptions}

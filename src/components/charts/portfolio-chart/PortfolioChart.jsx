@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-loop-func */
 import React from 'react';
 import ReactApexChart from 'react-apexcharts';
@@ -39,7 +40,7 @@ export default class extends React.Component {
         },
         stroke: {
           curve: 'smooth',
-          width: [2, 2, 2, 2]
+          width: []
         },
         xaxis: {
           tickAmount: 8,
@@ -104,38 +105,87 @@ export default class extends React.Component {
           // shared: true
         },
         markers: {
-          size: [0, 0, 0, 6]
+          size: []
         }
       }
     };
   }
 
-  updateChart(csvContent) {
-    const csv = parseCSV(csvContent);
+  updateChart(data) {
+    const {
+      M, n, W, numAssets,
+      corr, cov, w,
+      ar_mean, ar_std,
+      mean_cml, std_cml,
+      mean_exp, std_exp,
+      mean_mini, std_mini,
+      mean_mini_std, minimum_std,
+      mean_f, std_f
+    } = data;
 
-    // ["w", "mean12", "std12", "mean13", "std13", "mean23", "std23"]
-    const headerRow = csv[0];
-    const rows = csv.slice(-1)[0];
+    if (!numAssets) {
+      return;
+    }
 
-    const k = 2;
-    const Ckn = (headerRow.length - 8) / 2;
-    const numAssets = giaiPTBac2(1, -1, -Ckn * k);
+    const _numAssets = numAssets || n;
+
+    const strokeCurves = [];
+    const strokeWidths = [];
+    const markerSizes = [];
+
+    function pushLineStyle(curve = 'straight', width = 2, markerSize = 0) {
+      strokeCurves.push(curve);
+      strokeWidths.push(width);
+      markerSizes.push(markerSize);
+    }
 
     const portfolioes = [];
-    let counter = 1;
-    for (let i = 0; i < numAssets - 1; i++) {
-      for (let j = i + 1; j < numAssets; j++) {
-        const mean = rows.map((row) => +row[counter]);
-        const std = rows.map((row) => +row[counter + 1]);
+    for (let i = 1; i < _numAssets; i++) {
+      for (let j = i + 1; j < _numAssets + 1; j++) {
+        const mean = data[`mean${i}${j}`];
+        const std = data[`stdev${i}${j}`];
         const serie = mean.map((m, index) => [m, std[index]]);
         portfolioes.push({
-          name: `portfolio-${i + 1}${j + 1}`,
+          name: `portfolio-${i}-${j}`,
           data: serie
         });
-        counter += 2;
+        pushLineStyle('straight', 2, 0);
       }
     }
 
+    const connectAssetsLine = this.buildConnectAssetsLine(portfolioes);
+    portfolioes.push(connectAssetsLine);
+    pushLineStyle('straight', 4, 6);
+
+    const frontierLine = this.buildFrontierLine(mean_f, std_f);
+    portfolioes.push(frontierLine);
+    pushLineStyle('straight', 8, 0);
+
+    const minStdLine = this.buildMinStdPoint([mean_mini_std, minimum_std]);
+    portfolioes.push(minStdLine);
+    pushLineStyle('straight', 2, 6);
+
+    const cmlLine = this.buildCMLLine(mean_cml, std_cml);
+    portfolioes.push(cmlLine);
+    pushLineStyle('straight', 2, 0);
+
+    this.chart.updateOptions({
+      stroke: {
+        curve: strokeCurves,
+        width: strokeWidths
+      },
+      markers: {
+        size: markerSizes
+      }
+    });
+
+    this.chart.updateSeries([
+      ...portfolioes
+    ]);
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  buildConnectAssetsLine(portfolioes) {
     function sameFloat(a, b, precision = 8) {
       return Math.abs(a - b) < 10 ** -precision;
     }
@@ -156,42 +206,19 @@ export default class extends React.Component {
       }
     }
 
-    // Assets line
-    portfolioes.push(
-      { name: 'Assets', data: assets }
-    );
-
-    const frontierLine = this.buildFrontierLine(csv);
-    portfolioes.push(frontierLine);
-
-    const minStdLine = this.buildMinStdPoint(csv);
-    portfolioes.push(minStdLine);
-
-    const cmlLine = this.buildCMLLine(csv);
-    portfolioes.push(cmlLine);
-
-    this.chart.updateOptions({
-      stroke: {
-        curve: [...new Array(numLines + 6).fill('straight')],
-        width: [...new Array(numLines).fill(2), 4, 6, 2]
-      },
-      markers: {
-        size: [...new Array(numLines).fill(0), 6, 0, 8]
-      }
-    });
-
-    this.chart.updateSeries([
-      ...portfolioes
-    ]);
+    return { name: 'Assets', data: assets };
   }
 
   // eslint-disable-next-line class-methods-use-this
-  buildFrontierLine(csv) {
-    const wArr = csv[1];
-    const stdArr = csv[2];
-    const meanArr = csv[3];
-    const data = wArr.map((w, index) => [
-      meanArr[index], stdArr[index]
+  buildFrontierLine(meanF, stdevF) {
+    if (!meanF) {
+      return {
+        name: 'frontier',
+        data: []
+      };
+    }
+    const data = meanF.map((mean, index) => [
+      mean, stdevF[index]
     ]);
     return {
       name: 'frontier',
@@ -200,20 +227,17 @@ export default class extends React.Component {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  buildMinStdPoint(csv) {
+  buildMinStdPoint(minPoint) {
     return {
       name: 'Min Std',
-      data: [[csv[8][0], csv[7][0]]]
+      data: [minPoint]
     };
   }
 
   // eslint-disable-next-line class-methods-use-this
-  buildCMLLine(csv) {
-    const wArr = csv[1];
-    const stdArr = csv[5];
-    const meanArr = csv[6];
-    const data = wArr.map((w, index) => [
-      meanArr[index], stdArr[index]
+  buildCMLLine(mean_cml, std_cml) {
+    const data = mean_cml.map((mean, index) => [
+      mean, std_cml[index]
     ]);
     return {
       name: 'CML',
