@@ -147,12 +147,6 @@ export default class extends React.Component {
     });
   }
 
-  // handleCompanyChange(company) {
-  //   this.setState({
-  //     selectedCompany: company
-  //   });
-  // }
-
   updateChart() {
     const {
       D, g1, g2, t

@@ -43,14 +43,12 @@ export default class extends Component {
       <MDBTable className="min-max-table rounded white ">
         <MDBTableHead>
           <tr>
-            <th> </th>
-            <th>Min</th>
-            <th>Max</th>
+            <th>Min W</th>
+            <th>Max W</th>
           </tr>
         </MDBTableHead>
         <MDBTableBody>
           <tr>
-            <td><b>w</b></td>
             <td>
               <input
                 value={minW}

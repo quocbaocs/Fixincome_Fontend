@@ -1,7 +1,7 @@
 // equity
 const equity = '/equity';
 const stockCharts = `${equity}/stock-charts`;
-const financeReports = `${equity}/finance-reports`;
+const financeReports = `${equity}/financial-reports`;
 const ggm = `${equity}/GGM`;
 const hm = `${equity}/HM`;
 const tsm = `${equity}/TwoStage`;
@@ -13,10 +13,17 @@ const heatMap = `${forex}/heat-map`;
 const interestRateParity = `${forex}/interest-rate-parity`;
 const fxTool = `${forex}/fx-tool`;
 
+const fixincome = '/fixedincome';
+const tableincome = `${forex}/fixincome`;
+// const heatMap = `${forex}/heat-map`;
+// const interestRateParity = `${forex}/interest-rate-parity`;
+// const fxTool = `${forex}/fx-tool`;
 // Login
 const login = '/login';
 
 export default {
+  fixincome,
+  tableincome,
   equity,
   stockCharts,
   financeReports,
