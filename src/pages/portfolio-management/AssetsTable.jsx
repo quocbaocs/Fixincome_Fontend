@@ -13,8 +13,10 @@ export default class extends Component {
   constructor(props) {
     super(props);
     this.handleAssetsChange = this.handleAssetsChange.bind(this);
+    this.handleAssetsChangeName = this.handleAssetsChangeName.bind(this);
     this.handleRemoveAsset = this.handleRemoveAsset.bind(this);
     this.emitOnChangeEvent = this.emitOnChangeEvent.bind(this);
+    this.emitRemoveAssetEvent = this.emitRemoveAssetEvent.bind(this);
     const assets = props.value || [
       {
         mean: 0,
@@ -29,6 +31,12 @@ export default class extends Component {
     this.state = {
       assets
     };
+  }
+
+  emitRemoveAssetEvent(assetIndex) {
+    if (this.props.onRemoveAsset) {
+      this.props.onRemoveAsset(assetIndex);
+    }
   }
 
   emitOnChangeEvent() {
@@ -62,6 +70,26 @@ export default class extends Component {
     });
   }
 
+  handleAssetsChangeName(eventName) {
+    const { name, value, dataset: { index } } = eventName.target;
+    this.setState((prevStateName) => {
+      const { assets } = prevStateName;
+      if (+index >= assets.length) {
+        assets.push({});
+      }
+      assets[+index][name] = value.replace(/(\d+)/g, '');
+
+      const lastAsset = assets[assets.length - 1];
+      return {
+        assets: isValidAsset(lastAsset)
+          ? [...assets, {}]
+          : assets
+      };
+    }, () => {
+      this.emitOnChangeEvent();
+    });
+  }
+
   handleRemoveAsset(event) {
     const { dataset: { index } } = event.target;
     this.setState((prevState) => {
@@ -76,8 +104,21 @@ export default class extends Component {
         assets
       };
     }, () => {
+      this.emitRemoveAssetEvent(index);
       this.emitOnChangeEvent();
     });
+  }
+
+  renderInputName(value, name, index) {
+    return (
+      <input
+        value={value}
+        name={name}
+        data-index={index}
+        onChange={this.handleAssetsChangeName}
+        className="form-control"
+      />
+    );
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -108,7 +149,7 @@ export default class extends Component {
                 {isValidAsset(asset)
                   ? (
                     <span>
-                      {`Asset ${index + 1}`}
+                      {/* {`Asset ${index + 1}`} */}
                       <MDBBadge
                         color="danger"
                         className="d-inline-block ml-1 rounded-circle"
@@ -126,6 +167,14 @@ export default class extends Component {
           </tr>
         </MDBTableHead>
         <MDBTableBody>
+          <tr>
+            <td><b>Name</b></td>
+            {assets.map(({ value, key }, index) => (
+              <td key={key || `value-${index}`}>
+                {this.renderInputName(value, 'value', index)}
+              </td>
+            ))}
+          </tr>
           <tr>
             <td><b>Mean</b></td>
             {assets.map(({ mean, key }, index) => (

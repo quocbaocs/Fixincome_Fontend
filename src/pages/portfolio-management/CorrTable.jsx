@@ -1,7 +1,11 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
 import {
   MDBTable, MDBTableHead, MDBTableBody
 } from 'mdbreact';
+import classnames from 'classnames';
+
 
 function isValidAsset(asset) {
   return asset.mean != null && asset.stdev != null;
@@ -20,7 +24,7 @@ export default class extends Component {
   handleInputChange(event) {
     const { target: { name, value } } = event;
     this.setState((prevState) => {
-      prevState.corr[+name.split('_')[0]] = value;
+      prevState.corr[name] = value;
       return {
         corr: prevState.corr
       };
@@ -45,36 +49,47 @@ export default class extends Component {
   render() {
     const { assets } = this.props;
     const numAssets = assets.filter((asset) => isValidAsset(asset)).length;
-    const corrKeys = [];
-    for (let i = 0, counter = 0; i < numAssets - 1; i++) {
-      for (let j = i + 1; j < numAssets; j++, counter++) {
-        corrKeys.push(`${counter}_Corr ${i + 1}${j + 1}`);
-      }
-    }
-    const { corr = this.state.corr } = this.props;
+    const { value: corr = this.state.corr } = this.props;
 
     return (
       <MDBTable className="corr-table rounded white">
         <MDBTableHead>
           <tr>
-            {corrKeys.map((key) => (
-              <th key={key}>{key.split('_')[1]}</th>
+            <th>#</th>
+            {[...new Array(numAssets)].map((key, col) => (
+              <th key={col}>Corr {col + 1}</th>
             ))}
           </tr>
         </MDBTableHead>
         <MDBTableBody>
-          <tr>
-            {corrKeys.map((key, index) => (
-              <td>
-                <input
-                  name={key}
-                  value={corr[index]}
-                  onChange={this.handleInputChange}
-                  className="form-control"
-                />
-              </td>
-            ))}
-          </tr>
+          {[...new Array(numAssets)].map((keyI, row) => (
+            <tr key={row}>
+              <td style={{ verticalAlign: 'middle' }}>Corr {row + 1}</td>
+              {[...new Array(numAssets)].map((keyJ, col) => (
+                <td>
+                  <div className="form-group">
+                    <input
+                      name={`${row + 1}-${col + 1}`}
+                      type="number"
+                      step="0.1"
+                      value={row === col
+                        ? 1
+                        : (row <= col
+                          ? corr[`${row + 1}-${col + 1}`]
+                          : corr[`${col + 1}-${row + 1}`])}
+                      onChange={this.handleInputChange}
+                      disabled={row === col || row > col}
+                      className={classnames(
+                        'form-control', {
+                          disabled: row === col || row > col
+                        }
+                      )}
+                    />
+                  </div>
+                </td>
+              ))}
+            </tr>
+          ))}
         </MDBTableBody>
       </MDBTable>
     );

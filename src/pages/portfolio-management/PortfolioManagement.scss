@@ -1,23 +1,62 @@
 .portfolio-table {
+  th {
+    text-align: center;
+  }
   td {
+    padding: 4px !important;
+    vertical-align: middle;
+    text-align: center;
     input {
+      height: auto !important;
       width: 70px;
+      margin: auto !important;
+      padding: 4px;
+    }
+    .form-group {
+      margin: 0 !important;
     }
   }
 }
 
 .min-max-table {
+  th {
+    text-align: center;
+  }
   td {
+    padding: 4px !important;
+    vertical-align: middle;
+    text-align: center;
     input {
-      width: 150px;
+      height: auto !important;
+      width: 70px;
+      margin: auto !important;
+      padding: 4px;
+    }
+    .form-group {
+      margin: 0 !important;
     }
   }
 }
 
 .corr-table {
+  th {
+    text-align: center;
+  }
   td {
+    padding: 4px !important;
+    vertical-align: middle;
+    text-align: center;
     input {
+      height: auto !important;
       width: 70px;
+      margin: auto !important;
+
+      &.disabled {
+        color: gray !important;
+      }
+    }
+    .form-group {
+      margin: 0 !important;
     }
   }
 }
