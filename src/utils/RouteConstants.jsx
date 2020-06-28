@@ -1,7 +1,7 @@
 // equity
 const equity = '/equity';
 const stockCharts = `${equity}/stock-charts`;
-const financeReports = `${equity}/finance-reports`;
+const financeReports = `${equity}/financial-reports`;
 const ggm = `${equity}/GGM`;
 const hm = `${equity}/HM`;
 const tsm = `${equity}/TwoStage`;
