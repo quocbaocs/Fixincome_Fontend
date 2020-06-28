@@ -13,6 +13,9 @@ const heatMap = `${forex}/heat-map`;
 const interestRateParity = `${forex}/interest-rate-parity`;
 const fxTool = `${forex}/fx-tool`;
 
+// Login
+const login = '/login';
+
 export default {
   equity,
   stockCharts,
@@ -24,5 +27,6 @@ export default {
   heatMap,
   interestRateParity,
   fxTool,
-  tsm
+  tsm,
+  login
 };

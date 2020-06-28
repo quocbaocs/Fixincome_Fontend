@@ -21,6 +21,7 @@ import InterestRateParityPage from './pages/Forex/InterestRateParityPage';
 import FXToolPage from './pages/Forex/FXToolPage';
 import HM from './pages/H-Model/HM';
 import TwoStage from './pages/2-stage/TwoStage';
+import Login from './pages/login/Login';
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
       <Route path={RouteConstants.interestRateParity} component={InterestRateParityPage} />
       <Route path={RouteConstants.fxTool} component={FXToolPage} />
       <Route path="/portfolio-management" component={PortfolioManagement} />
+      <Route path={RouteConstants.login} component={Login} />
       <Redirect to="/home" />
     </Switch>
   );

@@ -9,6 +9,9 @@ import {
 import './MainLayout.scss';
 import './icomoon.css';
 import './style.css';
+import 'semantic-ui-css/semantic.min.css';
+import '../pages/login/Login';
+
 // import '../assets/css/style.css';
 // import '../assets/css/icomoon.css';
 import RouteConstants from '../utils/RouteConstants';
@@ -57,8 +60,13 @@ export default class extends React.Component {
                     </div>
                     <div className="col-md topper d-flex align-items-center justify-content-end">
                       <p className="mb-0 d-block">
-                        <a href="#" className="btn py-2 px-3 btn-primary">
-                          <span>Free Contact</span>
+                        <a href={RouteConstants.login} className="btn py-2 px-3 btn-primary">
+                          {
+                            this.props.isLoggedIn
+                              ? <span>Login</span>
+                              : <span>Hi, {this.props.userName}</span>
+                          }
+                          <console className="log" />
                         </a>
                       </p>
                     </div>
@@ -98,7 +106,7 @@ export default class extends React.Component {
                   </MDBDropdown>
                 </MDBNavItem>
                 <MDBNavItem>
-                  <MDBNavLink to="/fixed-income">Fix Income</MDBNavLink>
+                  <MDBNavLink to="/fixed-income">Fixed Income</MDBNavLink>
                 </MDBNavItem>
                 <MDBNavItem>
                   <MDBDropdown>

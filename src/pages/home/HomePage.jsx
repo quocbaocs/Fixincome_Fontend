@@ -19,7 +19,7 @@ export default class extends React.Component {
 
         <MDBCarousel
           activeItem={1}
-          length={3}
+          length={2}
           showControls={false}
           showIndicators
           className=" container"
@@ -100,7 +100,7 @@ export default class extends React.Component {
                     <div className="services text-center">
                       <div className="icon mt-2 d-flex justify-content-center align-items-center"><span className="flaticon-analysis" /></div>
                       <div className="text media-body">
-                        <h3>Fix Income</h3>
+                        <h3>Fixed Income</h3>
                         <p>Far far away, behind the word mountains, far from the countries Vokalia.</p>
                       </div>
                     </div>
