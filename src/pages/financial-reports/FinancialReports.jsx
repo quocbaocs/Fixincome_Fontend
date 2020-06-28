@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  MDBRow, MDBCol, MDBCard
+  MDBRow, MDBCol, MDBCard, MDBNav, MDBNavItem, MDBNavLink, MDBTabContent, MDBTabPane
 } from 'mdbreact';
 import unirest from 'unirest';
 import FinanceReport from '../../components/charts/Finance-report/FinanceReport';
@@ -12,26 +12,52 @@ export default class extends Component {
     return this.incomeStatementChartRef.current;
   }
 
+  get incomeStatementAnnualChart() {
+    return this.incomeStatementAnnualChartRef.current;
+  }
+
   get balanceSheetChart() {
     return this.balanceSheetChartRef.current;
+  }
+
+  get balanceSheetAnnualChart() {
+    return this.balanceSheetAnnualChartRef.current;
   }
 
   get cashFlowChart() {
     return this.cashFlowChartRef.current;
   }
 
+  get cashFlowAnnualChart() {
+    return this.cashFlowAnnualChartRef.current;
+  }
+
   constructor(props) {
     super(props);
     this.incomeStatementChartRef = React.createRef();
+    this.incomeStatementAnnualChartRef = React.createRef();
     this.balanceSheetChartRef = React.createRef();
+    this.balanceSheetAnnualChartRef = React.createRef();
     this.cashFlowChartRef = React.createRef();
+    this.cashFlowAnnualChartRef = React.createRef();
     this.handleCompanyChange = this.handleCompanyChange.bind(this);
     // this.handleDateRangeChange = this.handleDateRangeChange.bind(this);
     this.state = {
+      incomeTab: '1',
+      balanceTab: '1',
+      cashFlowTab: '1',
       company: null,
       globalQuote: { }
     };
   }
+
+  toggle = (tab, block) => () => {
+    if (this.state.activeItem !== tab) {
+      this.setState({
+        [`${block}Tab`]: tab
+      });
+    }
+  };
 
   handleCompanyChange(selectedCompany) {
     this.setState({
@@ -139,8 +165,14 @@ export default class extends Component {
   }
 
   updateIncomeStatementChart(incomeData) {
-    const { chartData } = incomeData.timeBasedSheets[0];
-    const { columnHeadings } = incomeData.timeBasedSheets[0];
+    this._updateIncomeStatementChart(incomeData, this.incomeStatementChart, 0);
+    this._updateIncomeStatementChart(incomeData, this.incomeStatementAnnualChart, 1);
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  _updateIncomeStatementChart(incomeData, chartComp, index) {
+    const { chartData } = incomeData.timeBasedSheets[index];
+    const { columnHeadings } = incomeData.timeBasedSheets[index];
     const series = [{
       name: 'Revenue',
       type: 'column',
@@ -157,13 +189,19 @@ export default class extends Component {
     const xaxis = {
       categories: columnHeadings
     };
-    this.incomeStatementChart.chart.updateSeries(series);
-    this.incomeStatementChart.chart.updateOptions({ xaxis });
+    chartComp.chart.updateSeries(series);
+    chartComp.chart.updateOptions({ xaxis });
   }
 
   updateBalanceSheetChart(balanceSheetData) {
-    const { chartData } = balanceSheetData.timeBasedSheets[0];
-    const { columnHeadings } = balanceSheetData.timeBasedSheets[0];
+    this._updateBlanceSheetChart(balanceSheetData, this.balanceSheetChart, 0);
+    this._updateBlanceSheetChart(balanceSheetData, this.balanceSheetAnnualChart, 1);
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  _updateBlanceSheetChart(balanceSheetData, chartComp, index) {
+    const { chartData } = balanceSheetData.timeBasedSheets[index];
+    const { columnHeadings } = balanceSheetData.timeBasedSheets[index];
     const series = [{
       name: 'Total Assets',
       type: 'column',
@@ -180,13 +218,19 @@ export default class extends Component {
     const xaxis = {
       categories: columnHeadings
     };
-    this.balanceSheetChart.chart.updateSeries(series);
-    this.balanceSheetChart.chart.updateOptions({ xaxis });
+    chartComp.chart.updateSeries(series);
+    chartComp.chart.updateOptions({ xaxis });
   }
 
   updateCashFlowChart(cashFlowData) {
-    const { chartData } = cashFlowData.timeBasedSheets[0];
-    const { columnHeadings } = cashFlowData.timeBasedSheets[0];
+    this._updateCashFlowChart(cashFlowData, this.cashFlowChart, 0);
+    this._updateCashFlowChart(cashFlowData, this.cashFlowAnnualChart, 1);
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  _updateCashFlowChart(cashFlowData, chartComp, index) {
+    const { chartData } = cashFlowData.timeBasedSheets[index];
+    const { columnHeadings } = cashFlowData.timeBasedSheets[index];
     const series = [{
       name: 'Operating',
       type: 'column',
@@ -203,8 +247,8 @@ export default class extends Component {
     const xaxis = {
       categories: columnHeadings
     };
-    this.cashFlowChart.chart.updateSeries(series);
-    this.cashFlowChart.chart.updateOptions({ xaxis });
+    chartComp.chart.updateSeries(series);
+    chartComp.chart.updateOptions({ xaxis });
   }
 
   updateChart(data) {
@@ -283,22 +327,43 @@ export default class extends Component {
           <MDBCol>
             <MDBCard className="p-3 my-3">
               <h3>Income Statement</h3>
-              <div className="d-flex">
-                <div className="flex-fill">
-                  <FinanceReport ref={this.incomeStatementChartRef} />
-                </div>
-                {/* <div className="mx-3" style={{ whiteSpace: 'pre' }}>
-                  <div>
-                    <div>Revenue</div>
-                    <div>{}</div>
-                  </div>
-                  <div>
-                    <div>Net Income</div>
-                  </div>
-                  <div>
-                    <div>Profit Margin</div>
-                  </div>
-                </div> */}
+              <div>
+                <MDBNav className="nav-tabs">
+                  <MDBNavItem>
+                    <MDBNavLink
+                      link
+                      to="#"
+                      active={this.state.incomeTab === '1'}
+                      onClick={this.toggle('1', 'income')}
+                      role="tab"
+                    >
+                      Quartery
+                    </MDBNavLink>
+                  </MDBNavItem>
+                  <MDBNavItem>
+                    <MDBNavLink
+                      link
+                      to="#"
+                      active={this.state.incomeTab === '2'}
+                      onClick={this.toggle('2', 'income')}
+                      role="tab"
+                    >
+                      Annual
+                    </MDBNavLink>
+                  </MDBNavItem>
+                </MDBNav>
+                <MDBTabContent activeItem={this.state.incomeTab}>
+                  <MDBTabPane tabId="1" role="tabpanel">
+                    <div className="flex-fill">
+                      <FinanceReport ref={this.incomeStatementChartRef} />
+                    </div>
+                  </MDBTabPane>
+                  <MDBTabPane tabId="2" role="tabpanel">
+                    <div className="flex-fill">
+                      <FinanceReport ref={this.incomeStatementAnnualChartRef} />
+                    </div>
+                  </MDBTabPane>
+                </MDBTabContent>
               </div>
             </MDBCard>
           </MDBCol>
@@ -308,22 +373,43 @@ export default class extends Component {
           <MDBCol>
             <MDBCard className="p-3 my-3">
               <h3>Balance Sheet</h3>
-              <div className="d-flex">
-                <div className="flex-fill">
-                  <FinanceReport ref={this.balanceSheetChartRef} />
-                </div>
-                {/* <div className="mx-3">
-                  <div>name</div>
-                  <div style={{ whiteSpace: 'pre-wrap' }}>
-                    <p><MDBIcon icon="circle" size="lg" className="black-text mr-2" />Total Assets</p>
-                  </div>
-                  <div style={{ whiteSpace: 'pre-wrap' }}>
-                    <p><MDBIcon icon="circle" size="lg" className="indigo-text mr-2" />Total Liabilitles</p>
-                  </div>
-                  <div style={{ whiteSpace: 'pre-wrap' }}>
-                    <p><MDBIcon icon="circle" size="lg" className="red-text mr-2" />Debt To Assets</p>
-                  </div>
-                </div> */}
+              <div>
+                <MDBNav className="nav-tabs">
+                  <MDBNavItem>
+                    <MDBNavLink
+                      link
+                      to="#"
+                      active={this.state.balanceTab === '1'}
+                      onClick={this.toggle('1', 'balance')}
+                      role="tab"
+                    >
+                      Quartery
+                    </MDBNavLink>
+                  </MDBNavItem>
+                  <MDBNavItem>
+                    <MDBNavLink
+                      link
+                      to="#"
+                      active={this.state.balanceTab === '2'}
+                      onClick={this.toggle('2', 'balance')}
+                      role="tab"
+                    >
+                      Annual
+                    </MDBNavLink>
+                  </MDBNavItem>
+                </MDBNav>
+                <MDBTabContent activeItem={this.state.balanceTab}>
+                  <MDBTabPane tabId="1" role="tabpanel">
+                    <div className="flex-fill">
+                      <FinanceReport ref={this.balanceSheetChartRef} />
+                    </div>
+                  </MDBTabPane>
+                  <MDBTabPane tabId="2" role="tabpanel">
+                    <div className="flex-fill">
+                      <FinanceReport ref={this.balanceSheetAnnualChartRef} />
+                    </div>
+                  </MDBTabPane>
+                </MDBTabContent>
               </div>
             </MDBCard>
           </MDBCol>
@@ -331,22 +417,43 @@ export default class extends Component {
           <MDBCol>
             <MDBCard className="p-3 my-3">
               <h3>Cash Flow</h3>
-              <div className="d-flex">
-                <div className="flex-fill">
-                  <FinanceReport ref={this.cashFlowChartRef} />
-                </div>
-                {/* <div className="mx-3">
-                  <div>name</div>
-                  <div style={{ whiteSpace: 'pre-wrap' }}>
-                    <p><MDBIcon icon="circle" size="lg" className="black-text mr-2" />Operating</p>
-                  </div>
-                  <div style={{ whiteSpace: 'pre-wrap' }}>
-                    <p><MDBIcon icon="circle" size="lg" className="indigo-text mr-2" />Investing</p>
-                  </div>
-                  <div style={{ whiteSpace: 'pre-wrap' }}>
-                    <p><MDBIcon icon="circle" size="lg" className="red-text mr-2" />Financing</p>
-                  </div>
-                </div> */}
+              <div>
+                <MDBNav className="nav-tabs">
+                  <MDBNavItem>
+                    <MDBNavLink
+                      link
+                      to="#"
+                      active={this.state.cashFlowTab === '1'}
+                      onClick={this.toggle('1', 'cashFlow')}
+                      role="tab"
+                    >
+                      Quartery
+                    </MDBNavLink>
+                  </MDBNavItem>
+                  <MDBNavItem>
+                    <MDBNavLink
+                      link
+                      to="#"
+                      active={this.state.cashFlowTab === '2'}
+                      onClick={this.toggle('2', 'cashFlow')}
+                      role="tab"
+                    >
+                      Annual
+                    </MDBNavLink>
+                  </MDBNavItem>
+                </MDBNav>
+                <MDBTabContent activeItem={this.state.cashFlowTab}>
+                  <MDBTabPane tabId="1" role="tabpanel">
+                    <div className="flex-fill">
+                      <FinanceReport ref={this.cashFlowChartRef} />
+                    </div>
+                  </MDBTabPane>
+                  <MDBTabPane tabId="2" role="tabpanel">
+                    <div className="flex-fill">
+                      <FinanceReport ref={this.cashFlowAnnualChartRef} />
+                    </div>
+                  </MDBTabPane>
+                </MDBTabContent>
               </div>
             </MDBCard>
           </MDBCol>
