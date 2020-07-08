@@ -1,0 +1,13 @@
+table{
+    border:2px solid white;
+    border-collapse: collapse; 
+}
+tr, td {
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 40px;
+    text-align: left;
+  }
+input[type="button"] {
+    margin: 10px;
+}

@@ -6,7 +6,7 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 var dataPoints =[];
 
 
-class Chart_Yield extends Component {
+export default class extends Component {
     render() {	
 		const options = {
             width:560,
@@ -60,4 +60,3 @@ class Chart_Yield extends Component {
 	}
 }
 
-export default Chart_Yield;

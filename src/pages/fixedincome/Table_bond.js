@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 
-class Table_bond extends Component {
+export default class extends Component {
   state = {
     todos: []
   };
@@ -56,4 +56,3 @@ class Table_bond extends Component {
   }
 }
 
-export default Table_bond;

@@ -21,9 +21,12 @@ import InterestRateParityPage from './pages/Forex/InterestRateParityPage';
 import FXToolPage from './pages/Forex/FXToolPage';
 import HM from './pages/H-Model/HM';
 import TwoStage from './pages/2-stage/TwoStage';
-import Fixedincome from './pages/fixedincome/Fixedincome'
+import Fixedincome from './pages/fixedincome/Fixedincome';
+import Maincaculator from './pages/CaculatorBonds/Maincaculator';
 import FinancialReports from './pages/financial-reports/FinancialReports';
 import Login from './pages/login/Login';
+
+
 
 
 function App() {
@@ -31,6 +34,7 @@ function App() {
     <Switch>
       <Route path="/home" component={HomePage} />
       <Route path={RouteConstants.fixincome} component={Fixedincome}/>
+      <Route path={RouteConstants.caculatorbons} component={Maincaculator}/>
       <Route path={RouteConstants.stockCharts} component={FinanceChartPage} />
       <Route path={RouteConstants.ggm} component={GGM} />
       <Route path={RouteConstants.financeReports} component={FinancialReports} />

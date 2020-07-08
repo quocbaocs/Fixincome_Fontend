@@ -3,21 +3,24 @@ import './Fixedincome.css';
 import Table_bond from './Table_bond'
 import Chart_Yield from './Chart_Yield'
 
-class App extends Component {
+export default class extends Component {
   render() {
     return (
+
       <div>
-        <div>
-          <Table_bond />
+        <br></br>
+        <br></br>
+        <div class='table_bond'>
+          <Table_bond></Table_bond>
         </div>
 
-        <div>
-          <Chart_Yield/>
-          
+        <br></br>
+        <div class='chart_yield'>
+          <Chart_Yield></Chart_Yield>
         </div>
+
       </div>
     );
   }
 }
 
-export default App;

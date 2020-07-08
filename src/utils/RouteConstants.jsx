@@ -13,17 +13,15 @@ const heatMap = `${forex}/heat-map`;
 const interestRateParity = `${forex}/interest-rate-parity`;
 const fxTool = `${forex}/fx-tool`;
 
-const fixincome = '/fixedincome';
-const tableincome = `${forex}/fixincome`;
-// const heatMap = `${forex}/heat-map`;
-// const interestRateParity = `${forex}/interest-rate-parity`;
-// const fxTool = `${forex}/fx-tool`;
+const fixincome = '/fixincome';
+const caculatorbons = '/caculatorbons'
+// const caculatorbons = `${fixincome}/caculatorbons`;
 // Login
 const login = '/login';
 
 export default {
   fixincome,
-  tableincome,
+  caculatorbons,
   equity,
   stockCharts,
   financeReports,

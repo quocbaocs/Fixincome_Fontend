@@ -12,7 +12,15 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.table_bond{
+  margin-top: 50px;
+  margin-right: 200px;
+  margin-left: 200px;
+}
+.chart_yield{
+  margin-top: 50px;
+  margin-left: 200px;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

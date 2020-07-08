@@ -106,7 +106,16 @@ export default class extends React.Component {
                   </MDBDropdown>
                 </MDBNavItem>
                 <MDBNavItem>
-                  <MDBNavLink to="/fixed-income">Fixed Income</MDBNavLink>
+                  {/* ----------------------------------------
+                   */}
+                   <MDBDropdown>
+                <MDBDropdownToggle nav caret>Fixed Income
+                </MDBDropdownToggle>
+                <MDBDropdownMenu basic>
+                <MDBDropdownItem href={RouteConstants.fixincome}>Fixed Income</MDBDropdownItem>
+                  <MDBDropdownItem href={RouteConstants.caculatorbons}>Bond Pricing</MDBDropdownItem>
+                </MDBDropdownMenu>
+              </MDBDropdown>
                 </MDBNavItem>
                 <MDBNavItem>
                   <MDBDropdown>
