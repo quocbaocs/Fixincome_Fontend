@@ -160,9 +160,6 @@ class YtmFrom extends Component {
 
             <form ref={form => this.form = form}>
                 <table>
-            <tr>{this.state.years}</tr>
-                </table>
-                <table>
                     <tr>
                         <td>Face Value ($):</td>
                         <td><input
