@@ -11,3 +11,18 @@ tr, td {
 input[type="button"] {
     margin: 10px;
 }
+
+table{
+    width: 600px;
+    color: aliceblue;
+}
+tr{
+    text-align: left;
+}
+
+.button {font-size: 24px;}
+form {
+    margin-left: 25%;
+    margin-right:25%;
+    width: 50%;
+}

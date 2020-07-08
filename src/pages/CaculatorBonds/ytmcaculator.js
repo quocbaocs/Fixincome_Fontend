@@ -7,15 +7,13 @@ class YtmFrom extends Component {
             principal: '',
             mvalue: '',
             rate: '',
-            ci: '1',
-            time: '',
-            irate: '',
-
+            ci: 'a',
+            years: '',
         };
     }
     handleButtonClick = () => {
         this.form.reset() // resets "username" field to "admin"
-      }
+    }
     myChangeprincipal = (event) => {
         this.setState({ principal: event.target.value });
     }
@@ -28,9 +26,10 @@ class YtmFrom extends Component {
     myChangeCi = (event) => {
         this.setState({ ci: event.target.value });
     }
-    myChangeMonthsMaturity = (event) => {
-        this.setState({ time: event.target.value });
+    myChangeYears = (event) => {
+        this.setState({ years: event.target.value });
     }
+
     addAction = (event) => {
         var principal = this.state.principal;
         var mvalue = this.state.mvalue;
@@ -51,86 +50,171 @@ class YtmFrom extends Component {
         this.setState({ yield: value_yield, mv: mv_mtry, ayield: ayield, apyield: apyield });
 
     }
+    ComputedAction = (event) => {
+        var facevalue = this.state.principal;
+        var currentvalue = this.state.mvalue;
+        var yeld = this.state.rate;
+
+        var yieldcompute;
+        var adjust;
+        var years = this.state.years;
+        var numberpaymentscompute;
+
+        var paymentinterval = this.state.ci;
+        // var currentyield;
+        var maturityyield;
+
+        if (paymentinterval === "a") {
+            numberpaymentscompute = years;
+            yieldcompute = yeld;
+            adjust = 1;
+        }
+
+        else if (paymentinterval === "sa") {
+            numberpaymentscompute = years * 2;
+            yieldcompute = yeld / 2;
+            adjust = 2;
+        }
+        else if (paymentinterval === "q") {
+            numberpaymentscompute = years * 4;
+            yieldcompute = yeld / 4;
+            adjust = 4;
+        }
+        else if (paymentinterval === "m") {
+            numberpaymentscompute = years * 12;
+            yieldcompute = yeld / 12;
+            adjust = 12;
+        }
+        else if (paymentinterval === "d") {
+            numberpaymentscompute = years * 365;
+            yieldcompute = yeld / 365;
+            adjust = 365;
+        }
+
+
+        var type = 0;
+        var guess = 0.1;
+
+        var nper = numberpaymentscompute;
+
+        var pmt = facevalue * (yieldcompute / 100);
+
+        var pv = currentvalue * -1;
+
+
+        var fv = facevalue * 1;
+
+
+        var rate = guess;
+
+
+        var f;
+        var x0;
+        var x1;
+        var y0;
+        var y1;
+        var y;
+
+        if (Math.abs(rate) < .000000001) {
+            y = pv * (1 + nper * rate) + pmt * (1 + rate * type) * nper + fv;
+        } else {
+            f = Math.exp(nper * Math.log(1 + rate));
+            y = pv * f + pmt * (1 / rate + type) * (f - 1) + fv;
+        }
+        y0 = pv + pmt * nper + fv;
+        y1 = pv * f + pmt * (1 / rate + type) * (f - 1) + fv;
+
+        // find root by secant method
+        var i = x0 = 0.0;
+        x1 = rate;
+        while ((Math.abs(y0 - y1) > .000000001) && (i < 128)) {
+            rate = (y1 * x0 - y0 * x1) / (y1 - y0);
+            x0 = x1;
+            x1 = rate;
+
+            if (Math.abs(rate) < .000000001) {
+                y = pv * (1 + nper * rate) + pmt * (1 + rate * type) * nper + fv;
+            } else {
+                f = Math.exp(nper * Math.log(1 + rate));
+                y = pv * f + pmt * (1 / rate + type) * (f - 1) + fv;
+            }
+
+            y0 = y1;
+            y1 = y;
+            ++i;
+
+        }
+        maturityyield = rate * adjust;
+
+        maturityyield = maturityyield * 100;
+
+        maturityyield = Math.round(maturityyield * 10000) / 10000;
+        // maturityyield = maturityyield.toString().concat('%');
+
+        this.setState({ yield_value: maturityyield });
+
+
+    }
     render() {
         return (
 
             <form ref={form => this.form = form}>
                 <table>
-                    {/* <tr>
-                        <td>{this.state.principal}</td>
-                        <td>{this.state.mvalue}</td>
-                        <td>{this.state.rate}</td>
-                        <td>{this.state.ci}</td>
-                        <td>{this.state.time}</td>
-                        <td>{this.state.irate}</td>
-
-                    </tr> */}
+            <tr>{this.state.years}</tr>
                 </table>
                 <table>
                     <tr>
-                        <td>Par value</td>
+                        <td>Face Value ($):</td>
                         <td><input
-                            type='text' id='principal'
+                            type='text' id='principal' NAME="facevalue"
                             onChange={this.myChangeprincipal}
                         /></td>
                     </tr>
                     <tr>
-                        <td>Market value</td>
+                        <td>Current Value ($):</td>
                         <td><input
-                            type='text' id='mvalue'
+                            type='text' id='mvalue' NAME="currentvalue"
                             onChange={this.myChangeMvalue}
                         /></td>
                     </tr>
                     <tr>
-                        <td>Coupon rate</td>
+                        <td>Annual Coupon Rate (%):	</td>
                         <td><input
-                            type='text' id='rate'
+                            type='text' id='rate' NAME="yield"
                             onChange={this.myChangeRate}
                         /></td>
                     </tr>
                     <tr>
                         <td>Coupon payment</td>
                         <td>
-                            <select value={this.state.value} onChange={this.myChangeCi.bind(this)} defaultValue='1' useDefault={true}>
-                                <option value='1'>Yearly</option>
-                                <option value='2'>Half yearly</option>
-                                <option value='4'>Quarterly</option>
-                                <option value='12'>Monthly</option>
-                                <option value='365'>Day</option>
+                            <select name="paymentinterval" value={this.state.value} onChange={this.myChangeCi.bind(this)} defaultValue='1' useDefault={true}>
+                                <option value='a'>Yearly</option>
+                                <option value='sa'>Half yearly</option>
+                                <option value='q'>Quarterly</option>
+                                <option value='m'>Monthly</option>
+                                <option value='d'>Day</option>
                             </select>
                         </td>
                     </tr>
                     <tr>
-                        <td>Months till maturity</td>
+                        <td>Years to Maturity:</td>
                         <td><input
-                            type='text' id='time'
-                            onChange={this.myChangeMonthsMaturity}
+                            type='text' id='years'
+                            onChange={this.myChangeYears}
                         /></td>
                     </tr>
                     <tr></tr>
                     <tr>
-                        <td rowSpan='1'> 
-                            <input class='button' type="button" onClick={this.handleButtonClick} value="Reset"/>
-                            <input class='button' type="button" onClick={this.addAction} value="Submit" />
+                        <td rowSpan='1'>
+                            <input class='button' type="button" onClick={this.handleButtonClick} value="Reset" />
+                            <input class='button' type="button" onClick={this.ComputedAction} value="Submit" />
                         </td>
                     </tr>
                     <tr>
-                        <td>Total Yield</td>
-                        <td>{this.state.yield}</td>
-                    </tr>
-                    <tr>
                         <td>Yield to maturity (YTM)</td>
-                        <td>{this.state.mv} %</td>
+                        <td>{this.state.yield_value} %</td>
                     </tr>
-                    <tr>
-                        <td>Annualized yield</td>
-                        <td>{this.state.ayield}</td>
-                    </tr>
-                    <tr>
-                        <td>Annualized yield %</td>
-                        <td>{this.state.apyield} %</td>
-                    </tr>
-                    
+            <br></br>
                 </table>
 
 
