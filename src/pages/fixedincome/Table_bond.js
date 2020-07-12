@@ -8,10 +8,10 @@ export default class extends Component {
 
   async componentDidMount() {
     try {
-      const res = await fetch('https://djangoappjson.herokuapp.com/fixincome/apibond/', {
+      const res = await fetch('http://127.0.0.1:8000/fixincome/apibond/', {
         method: 'GET',
         headers: {
-          'Authorization': 'Token 	e20491a5ad9952a562fe9f9f6aa126db13e6116d'
+          'Authorization': 'Token 	5f0b1117c659131585446128b7e3f746de2a055a'
         }
       });
       const todos = await res.json();

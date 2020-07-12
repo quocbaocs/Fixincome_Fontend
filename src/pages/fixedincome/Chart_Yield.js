@@ -44,7 +44,7 @@ export default class extends Component {
 	componentDidMount(){
         var chart = this.chart;
         // https://canvasjs.com/data/gallery/react/nifty-stock-price.json
-		fetch('https://djangoappjson.herokuapp.com/yieldcurve/')
+		fetch('http://127.0.0.1:8000/fixincome/yield/')
 		.then(function(response) {
 			return response.json();
 		})
